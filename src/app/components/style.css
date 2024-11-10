@@ -9,6 +9,10 @@
     rgba(77, 149, 255, 1) 53%,
     rgba(173, 241, 255, 1) 99%
   );
+  position: fixed;
+  width: 100%;
+  height: 92px;
+  top: 0;
 }
 
 #mobileNavBar {
@@ -38,6 +42,7 @@
     rgba(173, 241, 255, 1) 99%
   );
   padding-top: 60px; /* Place content 60px from the top */
+  border-radius: 20px;
 }
 
 #sideNav .closeButton {
@@ -49,6 +54,12 @@
   color: white;
 }
 
+#sideNav span {
+  color: white;
+  font-size: 10px;
+  text-align: center;
+  font-weight: 700;
+}
 .sideMenuLinks {
   padding: 8px 8px 8px 32px;
   text-decoration: none;

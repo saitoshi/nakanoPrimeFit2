@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import './style.css';
 import { useMedia } from 'react-use';
-import React, { useState, CSSProperties, useEffect } from 'react';
+import React, { useState, CSSProperties } from 'react';
 
 const NavBar = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -40,7 +40,7 @@ const NavBar = () => {
     maxWidth: 'max-content',
     width: '100%',
     height: 'auto',
-    maxHeight: '120px',
+    maxHeight: '90px',
     display: 'flex',
   };
 
@@ -76,13 +76,6 @@ const NavBar = () => {
     },
   ];
 
-  const mobileMenu = () => {
-    return menuItems.map((item) => (
-      <Link key={item.menu} href={item.link}>
-        {item.menu}
-      </Link>
-    ));
-  };
   return (
     <>
       {isDesktop ? (
@@ -96,7 +89,7 @@ const NavBar = () => {
           </a>
           <ul className='navLinks' style={deskNavLinks}>
             {menuItems.map((item) => (
-              <li>
+              <li key={item.menu}>
                 <Link
                   style={deskNavLinksList}
                   className='sideMenuLinks'
@@ -131,6 +124,8 @@ const NavBar = () => {
                     {item.menu}
                   </Link>
                 ))}
+                <hr />
+                <span>特定商取引法に基づく表記 | ©︎ Prime Fit Nakano</span>
               </div>
             ) : (
               <div className='menu-btn__burger'>

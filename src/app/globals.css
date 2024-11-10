@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+main {
+  margin-top: 92px;
+}
+body {
+  margin-top: 92px;
+  color: #333;
+  background: linear-gradient(
+    90deg,
+    rgba(237, 255, 255, 1) 0%,
+    rgba(239, 253, 255, 1) 100%
+  );
+  width: 100%;
+  font-family: Zen Kaku Gothic New;
+}
 #navMenu {
   list-style-type: none;
   margin: 0 0 0 0;
@@ -52,4 +66,160 @@
   right: 25px;
   font-size: 36px;
   margin-left: 50px;
+}
+
+.rowSplit {
+  display: flex;
+  margin-bottom: 10px;
+}
+.halfSplit {
+  flex: 50%;
+  min-width: 50%;
+  margin: 0 15px;
+}
+
+.halfSplit h3 {
+  text-align: center;
+  font-weight: 700;
+  color: #333;
+}
+.threeCol {
+  flex: 33%;
+  min-width: 33%;
+  font-size: 14px;
+  text-align: center;
+  margin-right: 2px;
+  margin-left: 2px;
+}
+
+.smlRightCol {
+  flex: 0 0 45%;
+  max-width: 45%;
+}
+
+.smlRightCol > img {
+  max-width: 75%;
+}
+.bigLeftCol {
+  flex: 0 0 55%;
+  max-width: 55%;
+}
+
+#introSection {
+  background-color: rgba(173, 241, 255, 1);
+  padding: 64px 60px 0;
+}
+.introMessage span {
+  color: aqua;
+  font-weight: 900;
+}
+.introMessage {
+  text-align: left;
+  font-weight: 700;
+  font-size: 40px;
+  color: #333;
+  font-family: Zen Kaku Gothic New;
+  background: white;
+  padding: 1px 16px;
+  border-radius: 10px;
+}
+
+.introFeature {
+  margin: 24px 0 56px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mobileIntroImgContainer {
+  display: none;
+}
+.introFeaturePoint {
+  border-radius: 50%;
+  background: rgba(69, 242, 255, 1);
+  color: #fff;
+  width: 100px;
+  height: 100px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.introImgContainer img {
+  border-radius: 10px;
+}
+.lineContact {
+  padding: 10px 15px;
+}
+
+.lineButton {
+  background-color: green;
+  padding: 30px 45px;
+  text-align: center;
+  font-weight: 700;
+  color: white;
+  border-radius: 40px;
+}
+
+#ownerSection {
+  margin: 10px 15px;
+}
+#ownerSectionContainer {
+  background-color: rgb(130 180 254);
+  padding: 0 40px;
+  border-radius: 40px;
+}
+#serviceSectionContainer h2,
+#ownerSectionContainer h2,
+#locationSectionContainer h2 {
+  padding: 104px 0 72px;
+  text-align: center;
+}
+
+#ownerSectionContainer h3 {
+  font-size: 28px;
+  font-weight: 700;
+}
+.subHeader {
+  color: rgba(69, 242, 255, 1);
+  font-weight: 700;
+}
+
+.mainHeader {
+  font-family: Zen Kaku Gothic New;
+  font-size: 36px;
+  font-weight: 700;
+}
+@media screen and (max-width: 700px) {
+  #introSection {
+    padding: 20px 12px 56px;
+  }
+  .rowSplit {
+    flex-direction: column;
+  }
+  .smlRightCol,
+  .bigLeftCol {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-bottom: 10px;
+  }
+  .lineButton {
+    font-size: 14px;
+    padding: 15px;
+    margin: 5px 1px;
+  }
+
+  .lineContact {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+  #ownerSectionContainer h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 5px 0;
+  }
 }
