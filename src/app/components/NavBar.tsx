@@ -1,24 +1,18 @@
 'use client';
 import Link from 'next/link';
+import './style.css';
+import { useMedia } from 'react-use';
 import React, { useState, CSSProperties, useEffect } from 'react';
-import { useRouter } from 'next/router';
 
 const NavBar = () => {
-  const [nav, setNav] = useState(false);
-  const [width, setWidth] = useState<any>();
+  const [open, setOpen] = useState<boolean>(false);
 
-  useEffect(() => {
-    const handleResizeWindow = () => setWidth(window.innerWidth);
-    // subscribe to window resize event "onComponentDidMount"
+  const isDesktop = useMedia('(min-width: 768px)', true);
 
-    window.addEventListener('resize', handleResizeWindow);
-    return () => {
-      // unsubscribe "onComponentDestroy"
-      window.removeEventListener('resize', handleResizeWindow);
-    };
-  }, []);
+  const closeSideMenu = () => setOpen(!open);
 
-  const breakPoint = 500;
+  const openSideMenu = () => setOpen(true);
+
   /** Unique Nav */
   const deskNavBar: CSSProperties = {
     display: 'flex',
@@ -49,10 +43,50 @@ const NavBar = () => {
     maxHeight: '120px',
     display: 'flex',
   };
+
+  const mobileNavLogo: CSSProperties = {
+    maxWidth: 'max-content',
+    width: '100%',
+    height: 'auto',
+    maxHeight: '100px',
+    display: 'flex',
+    padding: '10px 0',
+  };
+
+  const menuItems = [
+    {
+      menu: 'HOME',
+      link: '/',
+    },
+    {
+      menu: 'SERVICE',
+      link: '/service',
+    },
+    {
+      menu: 'LOCATION',
+      link: '/location',
+    },
+    {
+      menu: 'CONTACT',
+      link: '/contact',
+    },
+    {
+      menu: 'FAQ',
+      link: '/faq',
+    },
+  ];
+
+  const mobileMenu = () => {
+    return menuItems.map((item) => (
+      <Link key={item.menu} href={item.link}>
+        {item.menu}
+      </Link>
+    ));
+  };
   return (
-    <div id='navMenu'>
-      {width > breakPoint ? (
-        <div className='primaryNav' style={deskNavBar}>
+    <>
+      {isDesktop ? (
+        <div id='navMenu' style={deskNavBar}>
           <a href='/'>
             <img
               style={desktopNavLogo}
@@ -61,37 +95,52 @@ const NavBar = () => {
             />
           </a>
           <ul className='navLinks' style={deskNavLinks}>
-            <li>
-              <a href='/' style={deskNavLinksList}>
-                HOME
-              </a>
-            </li>
-            <li>
-              <a href='#' style={deskNavLinksList}>
-                SERVICE
-              </a>
-            </li>
-            <li>
-              <a href='#' style={deskNavLinksList}>
-                LOCATION
-              </a>
-            </li>
-            <li>
-              <a href='#' style={deskNavLinksList}>
-                CONTACT
-              </a>
-            </li>
-            <li>
-              <a href='#' style={deskNavLinksList}>
-                FAQ
-              </a>
-            </li>
+            {menuItems.map((item) => (
+              <li>
+                <Link
+                  style={deskNavLinksList}
+                  className='sideMenuLinks'
+                  key={item.menu}
+                  href={item.link}>
+                  {item.menu}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
       ) : (
-        <div></div>
+        <div id='navMenu' style={deskNavBar}>
+          <a href='/'>
+            <img
+              style={mobileNavLogo}
+              src='/image/mainLogo.png'
+              alt='primeFitLogo'
+            />
+          </a>
+          <div id='sideMenuButton'>
+            {open ? (
+              <div id='sideNav'>
+                <p className='closeButton' onClick={() => closeSideMenu()}>
+                  &times;
+                </p>
+                {menuItems.map((item) => (
+                  <Link
+                    className='sideMenuLinks'
+                    key={item.menu}
+                    href={item.link}>
+                    {item.menu}
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <div className='menu-btn__burger'>
+                <p onClick={() => openSideMenu()}>&#8801;</p>
+              </div>
+            )}
+          </div>
+        </div>
       )}
-    </div>
+    </>
   );
 };
 
