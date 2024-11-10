@@ -167,6 +167,7 @@ body {
 #ownerSection {
   margin: 10px 15px;
 }
+#locationDetailContainer,
 #ownerSectionContainer {
   background-color: rgb(130 180 254);
   padding: 0 40px;
@@ -178,10 +179,16 @@ body {
   padding: 104px 0 72px;
   text-align: center;
 }
-
+#locationDetailContainer h3,
 #ownerSectionContainer h3 {
   font-size: 28px;
   font-weight: 700;
+}
+
+#locationDetailContainer > .halfSplit > b {
+  color: rgb(130 180 254);
+  font-weight: 700;
+  font-size: 20px;
 }
 .subHeader {
   color: rgba(69, 242, 255, 1);

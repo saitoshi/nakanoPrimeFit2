@@ -80,13 +80,13 @@ const NavBar = () => {
     <>
       {isDesktop ? (
         <div id='navMenu' style={deskNavBar}>
-          <a href='/'>
+          <Link href='/'>
             <img
               style={desktopNavLogo}
               src='/image/mainLogo.png'
               alt='primeFitLogo'
             />
-          </a>
+          </Link>
           <ul className='navLinks' style={deskNavLinks}>
             {menuItems.map((item) => (
               <li key={item.menu}>
@@ -103,13 +103,13 @@ const NavBar = () => {
         </div>
       ) : (
         <div id='navMenu' style={deskNavBar}>
-          <a href='/'>
+          <Link href='/'>
             <img
               style={mobileNavLogo}
               src='/image/mainLogo.png'
               alt='primeFitLogo'
             />
-          </a>
+          </Link>
           <div id='sideMenuButton'>
             {open ? (
               <div id='sideNav'>
