@@ -104,14 +104,14 @@ export default function Home() {
             <p className='subHeader'>LOCATION</p>
             <p className='mainHeader'>店舗情報</p>
           </h2>
-          <div
-            className='locationDetailContainer'
-            style={{ margin: '60px 0 0 0', display: 'flex' }}>
-            <div className='rowSplit'>
-              <div className='halfSplit'>
+
+          <div className='rowSplit'>
+            <div className='halfSplit'>
+              <div className='locationDetailContainer'>
                 <h3>Prime Fit 中野</h3>
               </div>
             </div>
+            <div className='halfSplit'></div>
           </div>
         </div>
       </div>
