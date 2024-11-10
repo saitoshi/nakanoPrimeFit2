@@ -2,6 +2,7 @@ import connectDB from '@/app/utils/connectDB';
 import { UserModel } from '@/app/utils/dataSchemas/userSchema';
 import { NextRequest, NextResponse } from 'next/server';
 import * as bcrypt from 'bcrypt';
+import { SignJWT } from 'jose';
 export async function POST(request: NextRequest): Promise<NextResponse> {
   // do something
   try {
@@ -19,7 +20,17 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         { status: 405 },
       );
     }
-    return NextResponse.json(user, { status: 200 });
+    const secretKey = new TextEncoder().encode(process.env.SESSION_SECRET!);
+    const token = await new SignJWT({
+      email: user.email,
+      role: user.role,
+    })
+      .setProtectedHeader({
+        alg: 'HS256',
+      })
+      .setExpirationTime('2h') //有効期限 2hは2時間　1dは1日
+      .sign(secretKey);
+    return NextResponse.json({ user: user, token: token }, { status: 200 });
   } catch (error) {
     console.log(error);
     return NextResponse.json(
