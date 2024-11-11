@@ -173,7 +173,17 @@ body {
   padding: 0 40px;
   border-radius: 40px;
 }
-#loginContainer h2,
+.pageContainer {
+  padding: 0 20px;
+}
+.pageContainer h2 {
+  padding: 54px 0 72px;
+  text-align: center;
+}
+
+.pageDescription {
+  text-align: center;
+}
 #serviceSectionContainer h2,
 #ownerSectionContainer h2,
 #locationSectionContainer h2 {
@@ -202,6 +212,13 @@ body {
   font-weight: 700;
 }
 @media screen and (max-width: 700px) {
+  #serviceSectionContainer h2,
+  #ownerSectionContainer h2,
+  #locationSectionContainer h2,
+  .pageContainer h2 {
+    padding: 20px 0 20px;
+    text-align: center;
+  }
   #introSection {
     padding: 20px 12px 56px;
   }
