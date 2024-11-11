@@ -7,12 +7,14 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   // do something
   try {
     await connectDB();
-    const res = await request.json();
-    const user = await UserModel.findOne({ email: res.email });
+    console.log(request.nextUrl.searchParams);
+    const res = await request.nextUrl.searchParams;
+    console.log(res.get('email'));
+    const user = await UserModel.findOne({ email: res.get('email') });
     if (!user) {
       return NextResponse.json({ message: 'user not found' }, { status: 404 });
     }
-    let isSamePwd = await bcrypt.compare(res.password, user.password);
+    let isSamePwd = await bcrypt.compare(res.get('password')!, user.password);
     if (!isSamePwd) {
       return NextResponse.json(
         { message: 'Password Does Not Match' },
