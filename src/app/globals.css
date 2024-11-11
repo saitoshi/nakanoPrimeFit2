@@ -173,6 +173,17 @@ body {
   padding: 0 40px;
   border-radius: 40px;
 }
+.pageContainer {
+  padding: 0 20px;
+}
+.pageContainer h2 {
+  padding: 54px 0 72px;
+  text-align: center;
+}
+
+.pageDescription {
+  text-align: center;
+}
 #serviceSectionContainer h2,
 #ownerSectionContainer h2,
 #locationSectionContainer h2 {
