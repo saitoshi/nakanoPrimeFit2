@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { CSSProperties } from "react";
+import { serviceSamples } from "../utils/models/mockModels";
+import { ServiceCard } from "../components/ServiceCard/ServiceCard";
 export const metadata: Metadata = {
   metadataBase: new URL("http://localhost:3000"),
   title: "Prime Fit Gym 中野 | サービス",
@@ -22,6 +23,7 @@ export default function Service() {
             現在、Prime Fitでは以下のサービスを提供しております。
           </p>
         </h2>
+        <ul className="cardList"></ul>
       </div>
     </div>
   );
