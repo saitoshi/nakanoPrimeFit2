@@ -212,6 +212,13 @@ body {
   font-weight: 700;
 }
 @media screen and (max-width: 700px) {
+  #serviceSectionContainer h2,
+  #ownerSectionContainer h2,
+  #locationSectionContainer h2,
+  .pageContainer h2 {
+    padding: 20px 0 20px;
+    text-align: center;
+  }
   #introSection {
     padding: 20px 12px 56px;
   }

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { serviceSamples } from "../utils/models/mockModels";
+import { IService } from "../constants/type";
+import { mockService } from "../utils/models/mockModels";
 import { ServiceCard } from "../components/ServiceCard/ServiceCard";
 export const metadata: Metadata = {
   metadataBase: new URL("http://localhost:3000"),
@@ -23,7 +24,11 @@ export default function Service() {
             現在、Prime Fitでは以下のサービスを提供しております。
           </p>
         </h2>
-        <ul className="cardList"></ul>
+        <ul className="cardList">
+          {mockService.map((service: IService) => {
+            return <ServiceCard key={service._id} service={service} />;
+          })}
+        </ul>
       </div>
     </div>
   );

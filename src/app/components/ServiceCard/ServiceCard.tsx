@@ -1,28 +1,26 @@
 "use client";
 import Link from "next/link";
+import { IService } from "@/app/constants/type";
+import "./style.css";
 
 type serviceInputs = {
-  _id: any;
-  title: string;
-  description: string;
-  thumbnail: string;
+  service: IService;
 };
-export const ServiceCard = ({
-  _id,
-  title,
-  description,
-  thumbnail,
-}: serviceInputs) => {
+export const ServiceCard = ({ service }: serviceInputs) => {
   return (
     <li className="cardItem">
-      <Link className="cardLink" href={`/service/${_id}`}>
+      <Link className="cardLink" href={`/service/${service._id}`}>
         <div className="cardMainImg">
-          <img className="cardImg" src={thumbnail} alt={title} />
+          <img
+            className="cardImg"
+            src={service.thumbnail}
+            alt={service.title}
+          />
         </div>
         <div className="text-section">
-          <h2 className="cardTitleSection">{title}</h2>
+          <h2 className="cardTitleSection">{service.title}</h2>
           <div className="cardDetails">
-            <p className="cardDescription">{description}</p>
+            <p className="cardDescription">{service.description}</p>
           </div>
         </div>
       </Link>
