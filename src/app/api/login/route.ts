@@ -8,7 +8,6 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     await connectDB();
     const res = await request.json();
-    console.log(res);
     const user = await UserModel.findOne({ email: res.email });
     if (!user) {
       return NextResponse.json({ message: 'user not found' }, { status: 404 });
