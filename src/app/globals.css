@@ -16,6 +16,7 @@ body {
   width: 100%;
   font-family: Zen Kaku Gothic New;
 }
+
 #navMenu {
   list-style-type: none;
   margin: 0 0 0 0;
@@ -246,5 +247,16 @@ body {
     font-size: 20px;
     font-weight: 600;
     margin: 5px 0;
+  }
+  .subHeader {
+    color: rgba(69, 242, 255, 1);
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .mainHeader {
+    font-family: Zen Kaku Gothic New;
+    font-size: 26px;
+    font-weight: 700;
   }
 }

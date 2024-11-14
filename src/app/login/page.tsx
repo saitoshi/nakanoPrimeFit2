@@ -1,31 +1,40 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { FormEvent } from 'react';
+import { LoadingWheel } from '../components/LoadingWheel/LoadingWheel';
 import './style.css';
 
 export default function Login() {
   const [email, setEmail] = useState<any>('');
   const [password, setPassword] = useState<any>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
 
   const router = useRouter();
   const loginUser = async (e: any) => {
     try {
       e.preventDefault();
+      setIsLoading(true);
       console.log(email);
       const res = await fetch('/api/login', {
         body: JSON.stringify({ email, password }),
         method: 'POST',
       });
       const userData = res.json();
+      setIsLoading(false);
       console.log(userData);
+      router.push('/');
     } catch (error) {
       console.log(error);
+      setIsError(true);
     }
   };
+  if (isLoading) {
+    return <LoadingWheel />;
+  }
   return (
     <div>
-      <div id='loginContainer'>
+      <div className='pageContainer'>
         <h2>
           <p className='subHeader'>LOGIN</p>
           <p className='mainHeader'>管理画面ログイン</p>
