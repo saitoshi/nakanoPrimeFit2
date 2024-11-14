@@ -7,14 +7,14 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   // do something
   try {
     await connectDB();
-    console.log(request.nextUrl.searchParams);
-    const res = await request.nextUrl.searchParams;
-    console.log(res.get('email'));
-    const user = await UserModel.findOne({ email: res.get('email') });
+    let reqBody = await request.json();
+    console.log(reqBody);
+    let { email, password } = reqBody;
+    const user = await UserModel.findOne({ email: email });
     if (!user) {
       return NextResponse.json({ message: 'user not found' }, { status: 404 });
     }
-    let isSamePwd = await bcrypt.compare(res.get('password')!, user.password);
+    let isSamePwd = await bcrypt.compare(password, user.password);
     if (!isSamePwd) {
       return NextResponse.json(
         { message: 'Password Does Not Match' },
@@ -31,12 +31,12 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       })
       .setExpirationTime('2h') //有効期限 2hは2時間　1dは1日
       .sign(secretKey);
-    return NextResponse.json({ user: user, token: token }, { status: 200 });
+    return NextResponse.json(
+      { status: 200, email: email, token: token },
+      { status: 200 },
+    );
   } catch (error) {
     console.log(error);
-    return NextResponse.json(
-      { error: 'Internal Server Error' },
-      { status: 500 },
-    );
+    return NextResponse.json({ message: 'server error' }, { status: 500 });
   }
 }
