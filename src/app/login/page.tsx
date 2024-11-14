@@ -1,9 +1,8 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { LoadingWheel } from '../components/LoadingWheel/LoadingWheel';
 import './style.css';
-
+import { LoadingWheel } from '../components/LoadingWheel/LoadingWheel';
 export default function Login() {
   const [email, setEmail] = useState<any>('');
   const [password, setPassword] = useState<any>('');
