@@ -18,7 +18,7 @@ export const DashboardTab = ({ tabs }: tabInputs) => {
         {tabs.map((item) => (
           <button
             key={item}
-            className='tabButton'
+            className={currentTab === item ? 'activeButton' : 'tabButton'}
             onClick={() => {
               handleCurrentTab(item);
             }}>
@@ -31,16 +31,18 @@ export const DashboardTab = ({ tabs }: tabInputs) => {
           <h5>{currentTab}</h5>
 
           <table id='tabTable'>
-            <tr>
-              <th>タイトル</th>
-              <th>サムネ画像</th>
-              <th>説明文</th>
-              <th>作成日</th>
-              <th>最新更新日</th>
-              <th>公開・非公開</th>
-              <th>編集</th>
-            </tr>
-            <tr></tr>
+            <tbody>
+              <tr>
+                <th>タイトル</th>
+                <th>サムネ画像</th>
+                <th>説明文</th>
+                <th>作成日</th>
+                <th>最新更新日</th>
+                <th>公開・非公開</th>
+                <th>編集</th>
+              </tr>
+              <tr></tr>
+            </tbody>
           </table>
         </div>
       </div>

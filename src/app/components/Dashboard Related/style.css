@@ -38,12 +38,19 @@
   text-align: center;
 }
 .tabButton {
-  padding-top: 15px;
+  padding: 15px 0;
   font-size: 18px;
   font-weight: 500;
 }
 .tabButton:hover {
   background-color: rgba(173, 241, 255, 1);
+}
+
+.activeButton {
+  padding: 15px 0;
+  font-size: 18px;
+  font-weight: 500;
+  background-color: rgba(69, 242, 255, 1);
 }
 .tabContainer {
   padding: 10px 5px 0 5px;
