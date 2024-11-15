@@ -22,7 +22,7 @@ export default function Login() {
       const userData = res.json();
       setIsLoading(false);
       console.log(userData);
-      router.push('/');
+      router.push('/dashboard');
     } catch (error) {
       console.log(error);
       setIsError(true);
