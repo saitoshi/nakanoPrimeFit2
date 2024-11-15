@@ -1,0 +1,94 @@
+.tab {
+  position: fixed; /* or absolute */
+  top: 25%;
+  left: 15%;
+  height: 500px;
+  width: 800px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.tabMenu {
+  padding-top: 10px;
+  display: flex;
+  width: 200px;
+  height: 500px;
+  flex-direction: column;
+  white-space: nowrap;
+  color: #333;
+  border-right: 1px solid;
+  border-color: whitesmoke;
+  overflow: auto;
+  position: fixed;
+}
+
+.tabBody {
+  margin-left: 200px;
+}
+
+.tabContainer {
+  padding: 0 15px;
+}
+.tabMenu h5 {
+  text-align: center;
+  font-weight: 700;
+  font-size: 20px;
+}
+.tabContainer h3 {
+  text-align: center;
+}
+.tabButton {
+  padding-top: 15px;
+  font-size: 18px;
+  font-weight: 500;
+}
+.tabButton:hover {
+  background-color: rgba(173, 241, 255, 1);
+}
+.tabContainer {
+  padding: 10px 5px 0 5px;
+}
+.tabContainer h5 {
+  text-align: center;
+  font-weight: 800;
+  font-size: 20px;
+}
+#tabTable {
+  margin: 5px 5px 0 5px;
+  border-radius: 3px;
+}
+#tabTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+#tabTable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  background-color: rgba(77, 149, 255, 1);
+  color: white;
+  text-align: center;
+  font-size: 16px;
+}
+
+@media screen and (max-width: 600px) {
+  .tab {
+    position: fixed; /* or absolute */
+    top: 25%;
+    left: 5%;
+    height: 400px;
+    width: 500px;
+  }
+
+  .tabMenu {
+    width: 100px;
+  }
+  .tabBody {
+    margin-left: 100px;
+  }
+  .tabBody {
+    font-size: 14px;
+  }
+  .tabMenu h5 {
+    font-size: 15px;
+  }
+}
