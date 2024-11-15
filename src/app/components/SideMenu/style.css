@@ -1,0 +1,17 @@
+#dashboardMenu {
+  display: flex;
+  height: 100vh;
+  width: 200px;
+  flex-direction: column;
+  white-space: nowrap;
+  color: white;
+  background: linear-gradient(
+    90deg,
+    rgba(69, 242, 255, 1) 0%,
+    rgba(77, 149, 255, 1) 53%,
+    rgba(173, 241, 255, 1) 99%
+  );
+  overflow: auto;
+  position: fixed;
+  z-index: 1;
+}
