@@ -2,13 +2,12 @@ import connectDB from '@/app/utils/connectDB';
 import { UserModel } from '@/app/utils/dataSchemas/userSchema';
 import { NextRequest, NextResponse } from 'next/server';
 import * as bcrypt from 'bcrypt';
-import { SignJWT } from 'jose';
+import jwt from 'jsonwebtoken';
 export async function POST(request: NextRequest): Promise<NextResponse> {
   // do something
   try {
     await connectDB();
     let reqBody = await request.json();
-    console.log(reqBody);
     let { email, password } = reqBody;
     const user = await UserModel.findOne({ email: email });
     if (!user) {
@@ -21,16 +20,12 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         { status: 405 },
       );
     }
-    const secretKey = new TextEncoder().encode(process.env.SESSION_SECRET!);
-    const token = await new SignJWT({
-      email: user.email,
-      role: user.role,
-    })
-      .setProtectedHeader({
-        alg: 'HS256',
-      })
-      .setExpirationTime('2h') //有効期限 2hは2時間　1dは1日
-      .sign(secretKey);
+
+    const secretKey = process.env.SESSION_SECRET as string;
+    const token = jwt.sign({ user }, secretKey, {
+      expiresIn: '1d',
+      algorithm: 'HS256',
+    });
     return NextResponse.json(
       { status: 200, email: email, token: token },
       { status: 200 },
