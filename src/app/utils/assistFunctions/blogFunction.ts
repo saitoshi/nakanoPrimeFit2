@@ -12,8 +12,10 @@ export async function getBlogs() {
     const blogResponses = await fetch('api/blog', {
       method: 'GET',
     });
+
     const blogData = await blogResponses.json();
-    return blogData;
+    await console.log(blogData['blogs']);
+    return blogData['blogs'];
   } catch (error) {
     return error;
   }
