@@ -6,11 +6,8 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
     await connectDB();
     var blogMap: any = {};
-    await BlogModel.find({}, function (error: any, blogs: any) {
-      blogs.forEach(function (blog: any) {
-        blogMap[blog._id] = blog;
-      });
-    });
+    blogMap = await BlogModel.find();
+
     return NextResponse.json(
       { message: 'blog list', blogs: blogMap },
       { status: 201 },
