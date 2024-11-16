@@ -9,7 +9,14 @@ export function getToken() {
     window.sessionStorage.getItem('token')
   );
 }
-
+/**
+ * @name setToken
+ * @desc Set the token to the local storage
+ */
+export function setToken(token: string) {
+  window.localStorage.setItem('token', token);
+  window.sessionStorage.setItem('token', token);
+}
 /**
  * @name removeToken
  * @desc Removes the token from the session stroage or local storage
@@ -21,19 +28,5 @@ export function removeToken() {
 }
 
 /**
- * @name getServices
- * @desc Gets the list of all of the services
- * @return An object of all the services provided by the company
+ *
  */
-export async function getServices() {
-  try {
-    const serviceResponse = await fetch('/api/service', {
-      method: 'GET',
-    });
-    const serviceData = serviceResponse.json();
-    return serviceData;
-  } catch (error) {
-    console.log(error);
-    return error;
-  }
-}

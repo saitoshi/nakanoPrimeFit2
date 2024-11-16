@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import './style.css';
 import { LoadingWheel } from '../components/LoadingWheel/LoadingWheel';
+import { setToken } from '../utils/assistFunctions/userFunctions';
 export default function Login() {
   const [email, setEmail] = useState<any>('');
   const [password, setPassword] = useState<any>('');
@@ -20,9 +21,10 @@ export default function Login() {
         body: JSON.stringify({ email, password }),
         method: 'POST',
       });
-      const userData = res.json();
+      const userData = await res.json();
+      console.log(userData['token']);
+      await setToken(userData['token']);
       setIsLoading(false);
-      console.log(userData);
       router.push('/dashboard');
     } catch (error) {
       console.log(error);
