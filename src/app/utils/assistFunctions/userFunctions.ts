@@ -37,9 +37,3 @@ export async function getServices() {
     return error;
   }
 }
-
-/**
- * @name getBlogs
- * @desc Gets the list of all the blogs
- * @return An object of all the blogs within the system
- */
