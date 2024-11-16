@@ -19,3 +19,27 @@ export function removeToken() {
   window.localStorage.removeItem('token');
   window.sessionStorage.removeItem('token');
 }
+
+/**
+ * @name getServices
+ * @desc Gets the list of all of the services
+ * @return An object of all the services provided by the company
+ */
+export async function getServices() {
+  try {
+    const serviceResponse = await fetch('/api/service', {
+      method: 'GET',
+    });
+    const serviceData = serviceResponse.json();
+    return serviceData;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+}
+
+/**
+ * @name getBlogs
+ * @desc Gets the list of all the blogs
+ * @return An object of all the blogs within the system
+ */

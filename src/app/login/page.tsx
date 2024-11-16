@@ -8,6 +8,7 @@ export default function Login() {
   const [password, setPassword] = useState<any>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
+  const [errorMsg, setErrorMsg] = useState<string>('');
 
   const router = useRouter();
   const loginUser = async (e: any) => {
@@ -64,6 +65,7 @@ export default function Login() {
               Submit
             </button>
           </div>
+          {isError ? <span>{errorMsg}</span> : <></>}
         </form>
       </div>
     </div>
