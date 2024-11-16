@@ -7,7 +7,7 @@ import { IBlog } from '../constants/type';
 import { BlogCard } from '../components/CardComponents/BlogCard';
 export default function Blog() {
   const [isLoad, setIsLoad] = useState<boolean>(true);
-  const [blogList, setBlogList] = useState<any>();
+  const [blogList, setBlogList] = useState<[IBlog]>();
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -29,7 +29,7 @@ export default function Blog() {
           <p className='mainHeader'>最新のブログ</p>
         </h2>
         <ul className='cardList'>
-          {blogList.map((blog: IBlog) => {
+          {blogList!.map((blog: IBlog) => {
             return <BlogCard key={blog._id} blog={blog} />;
           })}
         </ul>

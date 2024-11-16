@@ -20,7 +20,7 @@ export interface IBlog {
   thumbnail: any;
   content: any;
   categories: string[];
-  publishedDate?: string;
-  updatedDate?: string;
+  publishedDate?: Date;
+  updatedDate?: Date;
   contentImg?: string[];
 }

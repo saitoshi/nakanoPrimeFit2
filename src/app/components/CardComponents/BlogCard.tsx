@@ -21,7 +21,10 @@ export const BlogCard = ({ blog }: blogInputs) => {
         <div className='text-section'>
           <h2 className='cardTitleSection'>{blog.title}</h2>
           <div className='cardDetails'>
-            <p className='cardDescription'>{blog.description}</p>
+            <p className='cardDescription'>
+              {' '}
+              {blog.publishedDate!.toString().split('T')[0]}
+            </p>
           </div>
         </div>
       </Link>
