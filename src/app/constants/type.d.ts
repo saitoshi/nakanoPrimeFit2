@@ -12,3 +12,15 @@ export interface ILocation {
   phoneNumber: string;
   access: string;
 }
+
+export interface IBlog {
+  _id: any;
+  title: string;
+  description: string;
+  thumbnail: any;
+  content: any;
+  categories: string[];
+  publishedDate?: string;
+  updatedDate?: string;
+  contentImg?: string[];
+}

@@ -63,6 +63,10 @@ const NavBar = () => {
       link: '/service',
     },
     {
+      menu: 'BLOG',
+      link: '/blog',
+    },
+    {
       menu: 'LOCATION',
       link: '/location',
     },
