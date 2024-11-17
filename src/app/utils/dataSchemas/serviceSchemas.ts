@@ -2,11 +2,11 @@ import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 const serviceSchema = new Schema({
-  name: {
+  title: {
     type: String,
     required: true,
   },
-  mainImage: {
+  thumbnail: {
     type: String,
     required: true,
   },
@@ -24,8 +24,18 @@ const serviceSchema = new Schema({
   },
   appointmentSteps: { type: [], required: true },
   costs: { type: [], required: true },
-  createdAt: { type: Date, required: true },
-  lastUpdated: { type: Date, required: true },
+  publishedDate: { type: Date, required: true },
+  lastModified: { type: Date, required: true },
+  status: {
+    type: String,
+    enum: ['draft', 'released', 'private'],
+    required: true,
+    default: 'draft',
+  },
+  additionalImage: {
+    type: [],
+    required: true,
+  },
 });
 
 export const ServiceModel =

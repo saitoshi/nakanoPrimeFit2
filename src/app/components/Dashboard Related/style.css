@@ -2,8 +2,8 @@
   position: fixed; /* or absolute */
   top: 25%;
   left: 15%;
-  height: 500px;
-  width: 800px;
+  height: auto;
+  min-width: 800px;
   background-color: white;
   border-radius: 10px;
 }
@@ -12,20 +12,31 @@
   padding-top: 10px;
   display: flex;
   width: 200px;
-  height: 500px;
+  height: auto;
   flex-direction: column;
   white-space: nowrap;
   color: #333;
-  border-right: 1px solid;
-  border-color: whitesmoke;
   overflow: auto;
   position: fixed;
 }
-
+.dashboardThumbnail {
+  width: 100px;
+  text-align: center;
+}
+.dashboardThumbnail img {
+  width: 50%;
+  height: 70%;
+  aspect-ratio: 1/1;
+}
 .tabBody {
+  border-left: 3px solid;
+  border-color: whitesmoke;
   margin-left: 200px;
 }
-
+.addButtons {
+  bottom: 0;
+  position: fixed;
+}
 .tabContainer {
   padding: 0 15px;
 }
@@ -45,7 +56,24 @@
 .tabButton:hover {
   background-color: rgba(173, 241, 255, 1);
 }
-
+.createBlogButton {
+  background-color: rgba(173, 241, 255, 1);
+  margin: 10px 5px;
+  padding: 10px 5px;
+  border-radius: 10px;
+}
+.addServiceButton {
+  background-color: rgb(146, 248, 255);
+  margin: 10px 5px;
+  padding: 10px 5px;
+  border-radius: 10px;
+}
+.addUserButton {
+  background-color: rgb(100, 180, 255);
+  margin: 10px 5px;
+  padding: 10px 5px;
+  border-radius: 10px;
+}
 .activeButton {
   padding: 15px 0;
   font-size: 18px;
@@ -61,7 +89,7 @@
   font-size: 20px;
 }
 #tabTable {
-  margin: 5px 5px 0 5px;
+  margin: 5px 5px 15px 5px;
   border-radius: 3px;
 }
 #tabTable td {
@@ -75,6 +103,12 @@
   color: white;
   text-align: center;
   font-size: 16px;
+}
+
+.editButton {
+  background-color: greenyellow;
+  border-radius: 2px;
+  padding: 10px;
 }
 
 @media screen and (max-width: 600px) {
