@@ -16,16 +16,11 @@ export async function middleware(req: NextRequest) {
       if (!token) {
         return NextResponse.json({ message: 'Please Log In' }, { status: 403 });
       }
-      const secretKey = process.env.SESSION_SECRET as string;
 
-      let decoded = await jwt.verify(token, secretKey);
-
-      if (!decoded) {
-        return NextResponse.redirect(new URL('/login'));
-      }
       return NextResponse.next();
     }
   } catch (error) {
+    console.log(error);
     return NextResponse.json(
       { message: 'Verification Error' },
       { status: 403 },
