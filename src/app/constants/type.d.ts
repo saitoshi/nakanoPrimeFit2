@@ -24,4 +24,5 @@ export interface IBlog {
   lastModified: Date;
   contentImg?: string[];
   status: string;
+  author?: string;
 }
