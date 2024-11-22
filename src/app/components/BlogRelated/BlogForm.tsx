@@ -37,7 +37,15 @@ export const BlogForm = () => {
               type='title'
               id='title'
               name='title'
-              placeholder='ブログのタイトルを入力'></input>
+              placeholder='ブログのタイトルを入力'
+              onChange={(e: any) => {
+                setTitle(e.target.value);
+              }}></input>
+            <br />
+            <label htmlFor='title' className='formHeader'>
+              ブログのカテゴリーを選択
+            </label>
+
             <br />
             <label htmlFor='description' className='formHeader'>
               ブログの概要
@@ -46,10 +54,45 @@ export const BlogForm = () => {
             <textarea
               id='description'
               name='description'
-              placeholder='ブログのタイトルを入力'></textarea>
+              placeholder='ブログのタイトルを入力'
+              onChange={(e: any) => {
+                setDescription(e.target.value);
+              }}></textarea>
+            <br />
+            <label htmlFor='content' className='formHeader'>
+              ブログの内容
+            </label>
+            <br />
+            <textarea
+              id='content'
+              name='content'
+              onChange={(e: any) => {
+                setContent(e.target.value);
+              }}></textarea>
             <br />
           </div>
-          <div className='smlRightCol'></div>
+          <div className='smlRightCol'>
+            <label htmlFor='file' className='formHeader'>
+              ブログのサムネ画像
+            </label>
+            <br />
+            <input type='file' name='thumbnail'></input>
+            <br />
+            <label htmlFor='status' className='formHeader'>
+              ブログの公開状態
+            </label>
+            <br />
+            <select
+              name='status'
+              id='status-select'
+              onChange={(e: any) => {
+                setStatus(e.target.value);
+              }}>
+              <option value=''>--公開状態を選択してください--</option>
+              <option value='dog'>非公開</option>
+              <option value='cat'>公開</option>
+            </select>
+          </div>
         </div>
       </form>
     </div>

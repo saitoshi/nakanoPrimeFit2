@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { BlogForm } from '../components/BlogRelated/BlogForm';
+import { DashboardBlogCreate } from '../components/Dashboard Related/DashboardCreate';
 export default function CreateBlog() {
   return (
     <div>
@@ -8,7 +8,7 @@ export default function CreateBlog() {
           <p className='subHeader'>CREATE BLOG</p>
           <p className='mainHeader'>ブログを作成する</p>
         </h2>
-        <BlogForm />
+        <DashboardBlogCreate />
       </div>
     </div>
   );
