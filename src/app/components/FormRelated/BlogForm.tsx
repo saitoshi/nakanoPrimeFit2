@@ -26,6 +26,10 @@ export const BlogForm = () => {
   }
   return (
     <div id='blogForm'>
+      <h2>
+        <p className='subHeader'>CREATE BLOG</p>
+        <p className='mainHeader'>ブログを作成する</p>
+      </h2>
       <form className='formCreation'>
         <div className='rowSplit'>
           <div className='bigLeftCol'>

@@ -4,10 +4,7 @@ export default function CreateBlog() {
   return (
     <div>
       <div className='pageContainer'>
-        <h2>
-          <p className='subHeader'>CREATE BLOG</p>
-          <p className='mainHeader'>ブログを作成する</p>
-        </h2>
+        <br />
         <DashboardBlogCreate />
       </div>
     </div>

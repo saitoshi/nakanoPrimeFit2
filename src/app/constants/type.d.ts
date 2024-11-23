@@ -26,3 +26,13 @@ export interface IBlog {
   status: string;
   author?: string;
 }
+
+export interface IUser {
+  _id: any;
+  email: string;
+  password: string;
+  role: string;
+  createdAt: Date;
+  lastLoggedIn: Date;
+  updatedAt: Date;
+}

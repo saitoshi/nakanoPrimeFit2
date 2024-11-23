@@ -7,6 +7,7 @@
   background-color: white;
   border-radius: 10px;
   overflow: visible;
+  margin-top: 40px;
 }
 
 .tabMenu {
@@ -113,14 +114,25 @@
 }
 
 @media screen and (max-width: 600px) {
+  #mobileTab {
+    background-color: white;
+    border-radius: 10px;
+    overflow: visible;
+  }
   .tab {
     position: fixed; /* or absolute */
     top: 25%;
     left: 5%;
-    height: 400px;
+    height: auto;
     width: 500px;
   }
-
+  .mobileTabHeader button {
+    font-size: 12px;
+  }
+  .mobileTabBody {
+    border-top: 3px solid;
+    border-color: whitesmoke;
+  }
   .tabMenu {
     width: 100px;
   }
