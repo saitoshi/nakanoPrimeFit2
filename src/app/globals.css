@@ -165,18 +165,21 @@ body {
   color: white;
   border-radius: 40px;
 }
-
+#serviceSection,
 #ownerSection {
   margin: 10px 15px;
 }
+#serviceSectionContainer,
 #locationDetailContainer,
 #ownerSectionContainer {
-  background-color: rgb(130 180 254);
-  padding: 0 40px;
+  background-color: white;
+  padding: 10px 40px;
   border-radius: 40px;
+  margin: 0 0 10px 0;
 }
 .pageContainer {
   padding: 0 20px;
+  margin: 10px 0;
 }
 .pageContainer h2 {
   padding: 54px 0 72px;

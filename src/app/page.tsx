@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 import { CSSProperties } from 'react';
+import { mockService } from './utils/models/mockModels';
+import { IService } from './constants/type';
+import { ServiceCard } from './components/CardComponents/ServiceCard';
 import { LocationCard } from './components/LocationCard/LocationCard';
 export const metadata: Metadata = {
   metadataBase: new URL('http://localhost:3000'),
@@ -65,6 +68,11 @@ export default function Home() {
             <p className='subHeader'>SERVICE</p>
             <p className='mainHeader'>提供サービス</p>
           </h2>
+          <ul className='cardList'>
+            {mockService.slice(0, 1).map((service: IService) => {
+              return <ServiceCard key={service._id} service={service} />;
+            })}
+          </ul>
         </div>
       </div>
       <div id='ownerSection'>
