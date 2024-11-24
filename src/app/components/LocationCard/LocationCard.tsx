@@ -1,24 +1,21 @@
-"use client";
-import "./style.css";
-import React from "react";
-import { ILocation } from "@/app/constants/type";
+'use client';
+import './style.css';
+import React from 'react';
 
-type locationInputs = {
-  location: ILocation;
-};
-
-export const LocationCard = ({ location }: locationInputs) => {
+export const LocationCard = () => {
   return (
     <>
-      <dl className="locationCard">
+      <dl className='locationCard'>
         <dt>店舗名</dt>
-        <dd>{location.name}</dd>
+        <dd>Prime Fit 中野</dd>
         <dt>住所</dt>
-        <dd>{location.address}</dd>
+        <dd>
+          〒164-0001 東京都中野区中野２丁目１２−１２ オクト勧業ビル 401 オクト
+        </dd>
         <dt>TEL</dt>
-        <dd>{location.phoneNumber}</dd>
+        <dd>03-6820-0380</dd>
         <dt>最寄り駅</dt>
-        <dl>{location.access}</dl>
+        <dd>中野駅南口徒歩5分</dd>
       </dl>
     </>
   );

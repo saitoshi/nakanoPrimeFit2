@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { CSSProperties } from 'react';
+import { LocationCard } from './components/LocationCard/LocationCard';
 export const metadata: Metadata = {
   metadataBase: new URL('http://localhost:3000'),
   title: 'Prime Fit Gym 中野 | トップ',
@@ -102,14 +103,8 @@ export default function Home() {
             <p className='subHeader'>LOCATION</p>
             <p className='mainHeader'>店舗情報</p>
           </h2>
-
-          <div className='rowSplit'>
-            <div className='halfSplit'>
-              <div className='locationDetailContainer'>
-                <h3>Prime Fit 中野</h3>
-              </div>
-            </div>
-            <div className='halfSplit'></div>
+          <div className='pageContainer'>
+            <LocationCard />
           </div>
         </div>
       </div>

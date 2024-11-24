@@ -1,17 +1,50 @@
-.loader {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #3498db; /* Blue */
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  animation: spin 2s linear infinite;
+.locationCard {
+  display: flex;
+  width: 100%;
+  font-size: 1.6rem;
+  align-items: stretch;
+  flex-wrap: wrap;
+  background-color: white;
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
+.locationCard dt {
+  width: 20%;
+  color: white;
+  font-size: 1.6rem;
+  font-weight: 600;
+  padding: 8px 0;
+  display: flex;
+  text-align: center;
+  background-color: rgb(130 180 254);
+  justify-content: center;
+}
+
+.locationCard dd {
+  width: 80%;
+  padding: 8px 15px;
+  font-size: 1.5rem;
+  display: flex;
+  line-height: 1.3;
+  align-items: center;
+}
+
+@media screen and (max-width: 650px) {
+  .locationCard {
+    padding: 5vw;
+    text-align: center;
   }
-  100% {
-    transform: rotate(360deg);
+  .locationCard dt {
+    width: 100%;
+    display: block;
+    padding: 4px 0;
+    font-size: 1.4rem;
+    border-radius: 10px;
+  }
+  .locationCard dd {
+    width: 100%;
+    display: block;
+    padding: 4px 8px;
+    font-size: 1.4rem;
+    margin-top: 5px;
   }
 }
