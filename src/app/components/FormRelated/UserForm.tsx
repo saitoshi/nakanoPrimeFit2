@@ -35,6 +35,7 @@ export const UserForm = () => {
           onChange={(e: any) => {
             setEmail(e.target.value);
           }}></input>
+        <br />
         <label htmlFor='password' className='formHeader'>
           ユーザーのパスワード
         </label>

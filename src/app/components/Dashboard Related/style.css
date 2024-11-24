@@ -1,13 +1,12 @@
 .tab {
   position: fixed; /* or absolute */
   top: 25%;
-  left: 15%;
+  /**left: 15%;**/
   height: auto;
-  min-width: 800px;
+  width: auto;
   background-color: white;
   border-radius: 10px;
   overflow: visible;
-  margin-top: 40px;
 }
 
 .tabMenu {
