@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { getBlogs } from '../utils/assistFunctions/blogFunction';
 import './style.css';
-import { LoadingWheel } from '../components/LoadingWheel/LoadingWheel';
+import { LoadingWheel } from '../components/ConditionalComponents/LoadingWheel';
 import { IBlog } from '../constants/type';
 import { BlogCard } from '../components/CardComponents/BlogCard';
 export default function Blog() {

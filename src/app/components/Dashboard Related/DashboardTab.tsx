@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { LoadingWheel } from '../LoadingWheel/LoadingWheel';
+import { LoadingWheel } from '../ConditionalComponents/LoadingWheel';
 import { getBlogs } from '@/app/utils/assistFunctions/blogFunction';
 import { IBlog } from '@/app/constants/type';
 import './style.css';

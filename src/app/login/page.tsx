@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import './style.css';
-import { LoadingWheel } from '../components/LoadingWheel/LoadingWheel';
+import { LoadingWheel } from '../components/ConditionalComponents/LoadingWheel';
 import { setToken } from '../utils/assistFunctions/userFunctions';
 export default function Login() {
   const [email, setEmail] = useState<any>('');
