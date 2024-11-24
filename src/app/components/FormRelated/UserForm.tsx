@@ -1,10 +1,12 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { LoadingWheel } from '../ConditionalComponents/LoadingWheel';
 import { IUser } from '@/app/constants/type';
 import './style.css';
 
 export const UserForm = () => {
+  const router = useRouter();
   //variable declaration using the userState hook
   const [email, setEmail] = useState<IUser['email']>('');
   const [password, setPassword] = useState<IUser['password']>('');
@@ -19,6 +21,9 @@ export const UserForm = () => {
   useEffect(() => {
     if (email && password && role) setFilled(true);
   }, [email, password, role]);
+  const onChangeRole = (e: any) => {
+    setRole(e.target.value);
+  };
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     isLoad(true);
@@ -31,11 +36,23 @@ export const UserForm = () => {
         isError(true);
         setErrorMsg('有効なメールアドレスを入力してください。');
       }
-      isLoad(false);
-      setSuccess(true);
-    } catch (error) {
+      const res = await fetch('/api/users', {
+        body: JSON.stringify({ email, password, role }),
+        method: 'POST',
+      });
+      const result = await res.json();
+      await console.log(result);
+      if (result.status === 400) {
+        isError(true);
+        setErrorMsg('このメールアドレスでのユーザーさんは登録済みです');
+      } else {
+        setSuccess(true);
+      }
+      await isLoad(false);
+    } catch (error: any) {
       isLoad(false);
       isError(true);
+      console.log(error!.json());
       setErrorMsg('エラーが発生いたしました。後ほど、もう一度試してください');
     }
   };
@@ -79,9 +96,8 @@ export const UserForm = () => {
         <select
           name='role'
           id='role-select'
-          onChange={(e: any) => {
-            setRole(e.target.value);
-          }}>
+          onChange={onChangeRole}
+          value={'owner'}>
           <option value='owner'>管理者</option>
           <option value='writer'>ライター</option>
         </select>

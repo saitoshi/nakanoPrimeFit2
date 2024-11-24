@@ -25,7 +25,10 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const res = await request.json();
     let userExits = await UserModel.findOne({ email: res.email });
     if (userExits) {
-      return NextResponse.json({ error: 'User Exists' }, { status: 400 });
+      return NextResponse.json(
+        { status: 400, message: 'User Exists' },
+        { status: 400 },
+      );
     }
 
     const salt = await bcrypt.genSalt(Number(process.env.SALT));
@@ -34,7 +37,10 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       email: res.email,
       password: hashedPwd,
     });
-    return NextResponse.json({ message: 'User Created' }, { status: 201 });
+    return NextResponse.json(
+      { status: 201, message: 'User Created' },
+      { status: 201 },
+    );
   } catch (error) {
     console.log(error);
     return NextResponse.json(
