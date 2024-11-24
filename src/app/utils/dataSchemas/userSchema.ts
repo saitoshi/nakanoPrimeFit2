@@ -14,6 +14,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
     default: 'owner',
+    enum: ['owner', 'writer', 'viewer'],
   },
   createdAt: {
     type: Date,

@@ -47,6 +47,23 @@ export const UserForm = () => {
           onChange={(e: any) => {
             setPassword(e.target.value);
           }}></input>
+        <br />
+        <label htmlFor='password' className='formHeader'>
+          ユーザーの権限
+        </label>
+        <br />
+        <select
+          name='role'
+          id='role-select'
+          onChange={(e: any) => {
+            setRole(e.target.value);
+          }}>
+          <option value='owner'>管理者</option>
+          <option value='writer'>ライター</option>
+        </select>
+        <div style={{ textAlign: 'center' }}>
+          <button id='submitButton'>ユーザー登録</button>
+        </div>
       </form>
     </div>
   );
