@@ -5,6 +5,7 @@ import './style.css';
 import { LoadingWheel } from '../components/ConditionalComponents/LoadingWheel';
 import { IBlog } from '../constants/type';
 import { BlogCard } from '../components/CardComponents/BlogCard';
+import { Footer } from '../components/Footer/Footer';
 export default function Blog() {
   const [isLoad, setIsLoad] = useState<boolean>(true);
   const [blogList, setBlogList] = useState<[IBlog]>();
@@ -34,6 +35,7 @@ export default function Blog() {
           })}
         </ul>
       </div>
+      <Footer />
     </div>
   );
 }

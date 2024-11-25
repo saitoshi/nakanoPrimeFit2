@@ -18,6 +18,8 @@
     rgba(77, 149, 255, 1) 53%,
     rgba(173, 241, 255, 1) 99%
   );
+  bottom: 0;
+  width: 100%;
 }
 
 .footerNavLinks {

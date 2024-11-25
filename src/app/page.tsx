@@ -4,6 +4,7 @@ import { mockService } from './utils/models/mockModels';
 import { IService } from './constants/type';
 import { ServiceCard } from './components/CardComponents/ServiceCard';
 import { LocationCard } from './components/LocationCard/LocationCard';
+import { Footer } from './components/Footer/Footer';
 export const metadata: Metadata = {
   metadataBase: new URL('http://localhost:3000'),
   title: 'Prime Fit Gym 中野 | トップ',
@@ -117,6 +118,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

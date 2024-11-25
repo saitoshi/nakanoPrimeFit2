@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { IService } from '../constants/type';
 import { mockService } from '../utils/models/mockModels';
 import { ServiceCard } from '../components/CardComponents/ServiceCard';
+import { Footer } from '../components/Footer/Footer';
 export const metadata: Metadata = {
   metadataBase: new URL('http://localhost:3000'),
   title: 'Prime Fit Gym 中野 | サービス',
@@ -30,6 +31,7 @@ export default function Service() {
           })}
         </ul>
       </div>
+      <Footer />
     </div>
   );
 }

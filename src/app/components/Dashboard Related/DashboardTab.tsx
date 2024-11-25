@@ -104,19 +104,23 @@ export const DashboardMenu = () => {
   const [existBlog, setExistBlog] = useState<boolean>(false);
   const [existUser, setExistUser] = useState<boolean>(false);
   const [existService, setExistService] = useState<boolean>(false);
-  const tabs = ['サービス', 'ブログ', 'ユーザー'];
   return (
     <>
       {isDesktop ? (
         <div className='tab'>
           <div className='tabMenu'>
             <button className='tabButton'>サービス</button>
+            <button className='tabButton'>ブログ</button>
+            <button className='tabButton'>ユーザー</button>
             <button
               className='createBlogButton'
               onClick={async () => {
                 await setOpenBlog(true);
                 await setOpenService(false);
                 await setOpenUser(false);
+                await setExistBlog(false);
+                await setExistUser(false);
+                await setExistService(false);
               }}>
               &#x270E; ブログ作成
             </button>
@@ -126,6 +130,9 @@ export const DashboardMenu = () => {
                 await setOpenBlog(false);
                 await setOpenService(true);
                 await setOpenUser(false);
+                await setExistBlog(false);
+                await setExistUser(false);
+                await setExistService(false);
               }}>
               &#x271A; サービス追加
             </button>
@@ -135,6 +142,9 @@ export const DashboardMenu = () => {
                 await setOpenBlog(false);
                 await setOpenService(false);
                 await setOpenUser(true);
+                await setExistBlog(false);
+                await setExistUser(false);
+                await setExistService(false);
               }}>
               &#x263A; 新規ユーザー追加
             </button>

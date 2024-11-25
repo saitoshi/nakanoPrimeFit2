@@ -1,4 +1,5 @@
 import { FaqCard } from '../components/CardComponents/FaqCard';
+import { Footer } from '../components/Footer/Footer';
 
 export default function Faq() {
   return (
@@ -10,6 +11,7 @@ export default function Faq() {
         </h2>
         <FaqCard />
       </div>
+      <Footer />
     </div>
   );
 }
