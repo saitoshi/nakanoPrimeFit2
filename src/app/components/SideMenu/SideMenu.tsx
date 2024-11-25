@@ -1,11 +1,8 @@
 'use client';
 import Link from 'next/link';
-import './style.css';
-import { useMedia } from 'react-use';
-import React, { CSSProperties } from 'react';
+import React from 'react';
 
 const SideMenu = () => {
-  const isDesktop = useMedia('(min-width: 768px)', true);
   const dashboardItems = [
     {
       menu: 'TOP',
