@@ -1,3 +1,5 @@
+import { getToken } from './userFunctions';
+
 /**
  * @name getSerivces
  * @desc Retrieves all of the services available
@@ -12,6 +14,19 @@ export async function getServices() {
     await console.log(serviceData['services']);
 
     return serviceData['services'];
+  } catch (error) {
+    return error;
+  }
+}
+
+/**
+ * @name updateService
+ * @input id - the unique identifier of the said service
+ * @input token - the token of the user
+ */
+export async function updateService(_id: string) {
+  try {
+    const token = await getToken();
   } catch (error) {
     return error;
   }
