@@ -1,0 +1,19 @@
+.listTable {
+  overflow-x: auto;
+  border-collapse: collapse;
+  width: 100%;
+  margin: 10px 0;
+}
+th {
+  font-weight: 500;
+  font-size: 14px;
+}
+th,
+td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}

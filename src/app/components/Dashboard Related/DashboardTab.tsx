@@ -5,6 +5,7 @@ import { getBlogs } from '@/app/utils/assistFunctions/blogFunction';
 import { IBlog } from '@/app/constants/type';
 import { BlogForm } from '../FormRelated/BlogForm';
 import { UserForm } from '../FormRelated/UserForm';
+import { UserTable } from '../TableComponents/UserTable';
 import './style.css';
 import { useMedia } from 'react-use';
 type tabInputs = {

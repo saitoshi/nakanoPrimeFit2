@@ -4,9 +4,10 @@ import { useRouter } from 'next/navigation';
 import './style.css';
 import { LoadingWheel } from '../components/ConditionalComponents/LoadingWheel';
 import { setToken } from '../utils/assistFunctions/userFunctions';
+import { IUser } from '../constants/type';
 export default function Login() {
-  const [email, setEmail] = useState<any>('');
-  const [password, setPassword] = useState<any>('');
+  const [email, setEmail] = useState<IUser['email']>('');
+  const [password, setPassword] = useState<IUser['password']>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] =

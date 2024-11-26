@@ -4,7 +4,7 @@ import './style.css';
 import { useMedia } from 'react-use';
 import { BlogForm } from '../FormRelated/BlogForm';
 import { UserForm } from '../FormRelated/UserForm';
-
+import { UserTable } from '../TableComponents/UserTable';
 export const DashboardCreateMenu = () => {
   const isDesktop = useMedia('(min-width: 600px)', true);
   const [openBlog, setOpenBlog] = useState(true);
@@ -57,7 +57,7 @@ export const DashboardCreateMenu = () => {
               className='tabContainer'
               id='userTabBody'
               style={openUser ? { display: 'block' } : { display: 'none' }}>
-              <UserForm />
+              <UserTable />
             </div>
           </div>
         </div>

@@ -16,7 +16,7 @@ export async function GET(request: any): Promise<NextResponse> {
       );
     }
     token = await token.split(' ')[1];
-    await console.log(token);
+
     const secretKey = process.env.SESSION_SECRET as string;
 
     let decoded = await jwt.verify(token, secretKey);
@@ -28,9 +28,10 @@ export async function GET(request: any): Promise<NextResponse> {
       });
     }
     const userList = await UserModel.find();
-
-    console.log(userList);
-    return NextResponse.json(userList, { status: 200 });
+    return NextResponse.json(
+      { userList: userList, status: 201 },
+      { status: 200 },
+    );
   } catch (error) {
     console.log(error);
     return NextResponse.json(
