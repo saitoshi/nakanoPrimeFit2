@@ -174,6 +174,15 @@ export const DashboardMenu = () => {
           <div
             className='mobileTabBody'
             style={
+              currentTab == 'addService'
+                ? { display: 'block' }
+                : { display: 'none' }
+            }>
+            <ServiceForm />
+          </div>
+          <div
+            className='mobileTabBody'
+            style={
               currentTab == 'addUser'
                 ? { display: 'block' }
                 : { display: 'none' }
@@ -188,6 +197,24 @@ export const DashboardMenu = () => {
                 : { display: 'none' }
             }>
             <UserTable />
+          </div>
+          <div
+            className='tabContent'
+            style={
+              currentTab == 'blogList'
+                ? { display: 'block' }
+                : { display: 'none' }
+            }>
+            <BlogTable />
+          </div>
+          <div
+            className='tabContent'
+            style={
+              currentTab == 'addBlog'
+                ? { display: 'block' }
+                : { display: 'none' }
+            }>
+            <BlogForm />
           </div>
         </div>
       )}

@@ -26,7 +26,7 @@ export const BlogForm = () => {
   }
   return (
     <div id='blogForm'>
-      <h2>
+      <h2 style={{ textAlign: 'center' }}>
         <p className='subHeader'>CREATE BLOG</p>
         <p className='mainHeader'>ブログを作成する</p>
       </h2>
