@@ -1,5 +1,5 @@
 #loginForm {
-  margin: 0 25%;
+  margin: 0 auto;
   background-color: rgba(69, 242, 255, 1);
   border-radius: 10px;
   padding: 0 15px 10px 15px;
@@ -11,7 +11,11 @@
   color: #333;
   font-size: 16px;
 }
-
+form,
+input,
+textarea {
+  width: 70%;
+}
 .loginSubmit {
   text-align: center;
   font-weight: 700;

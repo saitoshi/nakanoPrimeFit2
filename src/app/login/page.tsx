@@ -9,26 +9,38 @@ export default function Login() {
   const [password, setPassword] = useState<any>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
-  const [errorMsg, setErrorMsg] = useState<string>('');
+  const [errorMsg, setErrorMsg] =
+    useState<string>('エラーが発生いたしました。');
 
   const router = useRouter();
   const loginUser = async (e: any) => {
     try {
       e.preventDefault();
       setIsLoading(true);
-      console.log(email);
       const res = await fetch('/api/login', {
         body: JSON.stringify({ email, password }),
         method: 'POST',
       });
       const userData = await res.json();
-      console.log(userData['token']);
-      await setToken(userData['token']);
-      setIsLoading(false);
-      router.push('/dashboard');
+      if (userData['status'] == 404) {
+        setErrorMsg(
+          'こちらのメールアドレスのユーザーさんが登録されておりません。',
+        );
+        setIsError(true);
+      } else if (userData['status'] == 405) {
+        setErrorMsg('入力されたパスワードが正しくありません。');
+        setIsError(true);
+      } else if (userData['status'] == 200) {
+        await setToken(userData['token']);
+        setIsLoading(false);
+        router.push('/dashboard');
+      } else {
+        setIsError(true);
+      }
     } catch (error) {
-      console.log(error);
       setIsError(true);
+    } finally {
+      setIsLoading(false);
     }
   };
   if (isLoading) {
@@ -67,7 +79,7 @@ export default function Login() {
               Submit
             </button>
           </div>
-          {isError ? <span>{errorMsg}</span> : <></>}
+          {isError ? <span className='errorMsg'>{errorMsg}</span> : <></>}
         </form>
       </div>
     </div>

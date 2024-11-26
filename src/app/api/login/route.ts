@@ -11,7 +11,10 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     let { email, password } = reqBody;
     const user = await UserModel.findOne({ email: email });
     if (!user) {
-      return NextResponse.json({ message: 'user not found' }, { status: 404 });
+      return NextResponse.json(
+        { message: 'user not found', status: 404 },
+        { status: 404 },
+      );
     }
     let isSamePwd = await bcrypt.compare(password, user.password);
     if (!isSamePwd) {
