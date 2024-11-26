@@ -10,7 +10,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     if (!token) {
       return NextResponse.json(
         { message: 'Error No Token was received', status: 403 },
-        { status: 201 },
+        { status: 403 },
       );
     }
     const secretKey = process.env.SESSION_SECRET as string;

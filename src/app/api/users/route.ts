@@ -2,10 +2,31 @@ import connectDB from '@/app/utils/connectDB';
 import { UserModel } from '@/app/utils/dataSchemas/userSchema';
 import { NextRequest, NextResponse } from 'next/server';
 import * as bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 export async function GET(request: any): Promise<NextResponse> {
   // do something
   try {
     await connectDB();
+    let token = request.headers.get('Authorization');
+
+    if (!token) {
+      return NextResponse.json(
+        { message: 'Error No Token was received', status: 403 },
+        { status: 403 },
+      );
+    }
+    token = await token.split(' ')[1];
+    await console.log(token);
+    const secretKey = process.env.SESSION_SECRET as string;
+
+    let decoded = await jwt.verify(token, secretKey);
+
+    if (!decoded) {
+      return NextResponse.json({
+        message: 'verification error',
+        statu: 403,
+      });
+    }
     const userList = await UserModel.find();
 
     console.log(userList);
