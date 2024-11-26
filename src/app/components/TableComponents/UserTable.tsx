@@ -56,7 +56,7 @@ export const UserTable = () => {
   return (
     <>
       <div id='userList'>
-        <h2>
+        <h2 className='listHeader'>
           <p className='subHeader'>REGISTERED USER</p>
           <p className='mainHeader'>登録管理ユーザー</p>
         </h2>

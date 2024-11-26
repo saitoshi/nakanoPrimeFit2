@@ -1,6 +1,10 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { BlogTable } from '../TableComponents/BlogTable';
 import { UserTable } from '../TableComponents/UserTable';
+import { UserForm } from '../FormRelated/UserForm';
+import { BlogForm } from '../FormRelated/BlogForm';
+import { ServiceForm } from '../FormRelated/ServiceForm';
 import './style.css';
 import { useMedia } from 'react-use';
 
@@ -46,7 +50,114 @@ export const DashboardMenu = () => {
       {isDesktop ? (
         <div className='tab'>
           <div className='tabMenu'>
-            {tabMenu.slice(0, 2).map((menu) => {
+            {tabMenu.slice(0, 3).map((menu) => {
+              return (
+                <button
+                  className='tabButton'
+                  key={menu.name}
+                  onClick={() => {
+                    handleClick(menu.name);
+                  }}>
+                  {menu.title}
+                </button>
+              );
+            })}
+            <button
+              onClick={() => {
+                handleClick('addBlog');
+              }}
+              className='createBlogButton'>
+              &#x270E; ブログ作成
+            </button>
+            <button
+              onClick={() => {
+                handleClick('addService');
+              }}
+              className='addServiceButton'>
+              &#x271A; サービス追加
+            </button>
+            <button
+              onClick={() => {
+                handleClick('addUser');
+              }}
+              className='addUserButton'>
+              &#x263A; 新規ユーザー追加
+            </button>
+          </div>
+          <div className='tabBody'>
+            <div
+              className='tabContent'
+              style={
+                currentTab == 'blogList'
+                  ? { display: 'block' }
+                  : { display: 'none' }
+              }>
+              <BlogTable />
+            </div>
+            <div
+              className='tabContent'
+              style={
+                currentTab == 'addUser'
+                  ? { display: 'block' }
+                  : { display: 'none' }
+              }>
+              <UserForm />
+            </div>
+            <div
+              className='tabContent'
+              style={
+                currentTab == 'userList'
+                  ? { display: 'block' }
+                  : { display: 'none' }
+              }>
+              <UserTable />
+            </div>
+            <div
+              className='tabContent'
+              style={
+                currentTab == 'addBlog'
+                  ? { display: 'block' }
+                  : { display: 'none' }
+              }>
+              <BlogForm />
+            </div>
+            <div
+              className='tabContent'
+              style={
+                currentTab == 'addService'
+                  ? { display: 'block' }
+                  : { display: 'none' }
+              }>
+              <ServiceForm />
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div id='mobileTab'>
+          <div className='mobileTabHeader'>
+            <button
+              onClick={() => {
+                handleClick('addBlog');
+              }}
+              className='createBlogButton'>
+              &#x270E; ブログ作成
+            </button>
+            <button
+              onClick={() => {
+                handleClick('addService');
+              }}
+              className='addServiceButton'>
+              &#x271A; サービス追加
+            </button>
+            <button
+              onClick={() => {
+                handleClick('addUser');
+              }}
+              className='addUserButton'>
+              &#x263A; 新規ユーザー追加
+            </button>
+            <br />
+            {tabMenu.slice(0, 3).map((menu) => {
               return (
                 <button
                   className='tabButton'
@@ -59,9 +170,26 @@ export const DashboardMenu = () => {
               );
             })}
           </div>
+
+          <div
+            className='mobileTabBody'
+            style={
+              currentTab == 'addUser'
+                ? { display: 'block' }
+                : { display: 'none' }
+            }>
+            <UserForm />
+          </div>
+          <div
+            className='tabContent'
+            style={
+              currentTab == 'userList'
+                ? { display: 'block' }
+                : { display: 'none' }
+            }>
+            <UserTable />
+          </div>
         </div>
-      ) : (
-        <div id='mobileTab'></div>
       )}
     </>
   );

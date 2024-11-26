@@ -61,7 +61,7 @@ export const UserForm = () => {
   }
   return (
     <div id='userForm'>
-      <h2>
+      <h2 style={{ textAlign: 'center' }}>
         <p className='subHeader'>ADD USER</p>
         <p className='mainHeader'>管理ユーザーを追加する</p>
       </h2>

@@ -1,7 +1,7 @@
 .tab {
-  /* or absolute */
   top: auto;
   /**left: 15%;**/
+  min-height: 400px;
   height: auto;
   width: 100%;
   background-color: white;
@@ -20,6 +20,10 @@
   overflow: auto;
   position: fixed;
 }
+.imageHolder {
+  padding: 0;
+  text-align: center;
+}
 .dashboardThumbnail {
   width: 100px;
   text-align: center;
@@ -33,6 +37,11 @@
   border-left: 3px solid;
   border-color: whitesmoke;
   margin-left: 200px;
+  min-height: 400px;
+}
+.tabContent {
+  margin: 10px;
+  padding: 5px;
 }
 .addButtons {
   bottom: 0;
@@ -56,6 +65,9 @@
 }
 .tabButton:hover {
   background-color: rgba(173, 241, 255, 1);
+}
+.tableThumbnail {
+  max-width: 10%;
 }
 .createBlogButton {
   background-color: rgba(173, 241, 255, 1);
@@ -120,13 +132,17 @@
   }
   .tab {
     position: fixed; /* or absolute */
-    top: 25%;
-    left: 5%;
+    top: auto;
+    left: auto;
     height: auto;
     width: 500px;
   }
+  .mobileTabHeader {
+    text-align: center;
+  }
   .mobileTabHeader button {
     font-size: 12px;
+    margin-right: 5px;
   }
   .mobileTabBody {
     border-top: 3px solid;
