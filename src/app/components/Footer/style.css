@@ -12,6 +12,7 @@
 
 #footer {
   overflow: hidden;
+  position: relative;
   background: linear-gradient(
     90deg,
     rgba(69, 242, 255, 1) 0%,

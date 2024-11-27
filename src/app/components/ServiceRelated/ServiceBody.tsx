@@ -8,13 +8,17 @@ export const ServiceBody = () => {
   const [serviceList, setServiceList] = useState<IService[]>();
   const [load, setLoad] = useState<boolean>(true);
   const [error, setError] = useState<boolean>(false);
-  const [errorMsg, setErrorMsg] = useState<string>('エラーが発生いたしました');
 
   useEffect(() => {
     const fetchService = async () => {
-      const services = await getServices();
-      await setServiceList(services);
-      await setLoad(false);
+      try {
+        const services = await getServices();
+        await setServiceList(services);
+        await setLoad(false);
+      } catch (error) {
+        console.error(error);
+        setError(true);
+      }
     };
     fetchService();
   }, []);
