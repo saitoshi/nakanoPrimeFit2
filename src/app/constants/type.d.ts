@@ -2,7 +2,36 @@ export interface IService {
   _id: any;
   title: string;
   description: string;
-  thumbnail: any;
+  thumbnail: string;
+  images?: string[];
+  steps: [
+    {
+      title?: string;
+      description?: string;
+    },
+  ];
+  costs: [
+    {
+      title?: string;
+      cost?: string;
+    },
+  ];
+  campaign?: string[];
+  benefits?: [
+    {
+      title?: string;
+      description?: string;
+    },
+  ];
+  reviews?: [
+    {
+      title?: string;
+      description?: string;
+    },
+  ];
+  publishedDate: Date;
+  lastModified: Date;
+  status: string;
 }
 
 export interface ILocation {

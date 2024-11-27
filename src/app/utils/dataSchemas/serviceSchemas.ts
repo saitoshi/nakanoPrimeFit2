@@ -18,11 +18,15 @@ const serviceSchema = new Schema({
     type: [],
     required: true,
   },
-  customerComments: {
+  reviews: {
     type: [],
     required: true,
   },
-  appointmentSteps: { type: [], required: true },
+  campaign: {
+    type: [],
+    required: true,
+  },
+  steps: { type: [], required: true },
   costs: { type: [], required: true },
   publishedDate: { type: Date, required: true },
   lastModified: { type: Date, required: true },
@@ -32,7 +36,7 @@ const serviceSchema = new Schema({
     required: true,
     default: 'draft',
   },
-  additionalImage: {
+  images: {
     type: [],
     required: true,
   },
