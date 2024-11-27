@@ -20,6 +20,25 @@ export async function getServices() {
 }
 
 /**
+ * @name getService
+ * @param _id - unique identifier of the service
+ * @return service - The details of that service based on the id
+ */
+export async function getService(_id: string) {
+  try {
+    const serviceResponse = await fetch(`api/service/id=${_id}`, {
+      method: 'GET',
+    });
+    const serviceData = await serviceResponse.json();
+    await console.log(serviceData['services']);
+
+    return serviceData['services'];
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+/**
  * @name updateService
  * @input id - the unique identifier of the said service
  * @input token - the token of the user
