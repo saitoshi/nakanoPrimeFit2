@@ -46,14 +46,15 @@ export interface IBlog {
   _id: any;
   title: string;
   description: string;
-  thumbnail: any;
-  content: any;
-  categories: string[];
+  thumbnail: string;
+  keyword: string[];
+  content: [
+    { header?: string; body?: string; image?: string; image?: description },
+  ];
+  thumbnail: string;
   publishedDate: Date;
   lastModified: Date;
-  contentImg?: string[];
   status: string;
-  author?: string;
 }
 
 export interface IUser {
