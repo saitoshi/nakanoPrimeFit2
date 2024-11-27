@@ -49,9 +49,8 @@ export interface IBlog {
   thumbnail: string;
   keyword: string[];
   content: [
-    { header?: string; body?: string; image?: string; image?: description },
+    { header?: string; body?: string; image?: string; imageDesc?: string },
   ];
-  thumbnail: string;
   publishedDate: Date;
   lastModified: Date;
   status: string;

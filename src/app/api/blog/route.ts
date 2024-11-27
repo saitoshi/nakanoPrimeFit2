@@ -1,6 +1,7 @@
 import connectDB from '@/app/utils/connectDB';
 import { BlogModel } from '@/app/utils/dataSchemas/blogSchema';
 import { NextRequest, NextResponse } from 'next/server';
+import jwt from 'jsonwebtoken';
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
@@ -21,32 +22,46 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     await connectDB();
-    let reqBody = await request.json();
-    let {
-      title,
-      thumbnail,
-      content,
-      categories,
-      publishedDate,
-      contentImg,
-      status,
-    } = reqBody;
-    let today = new Date().getUTCDate();
+    let token = request.headers.get('Authorization');
+
+    if (!token) {
+      return NextResponse.json(
+        { message: 'Error No Token was received', status: 403 },
+        { status: 403 },
+      );
+    }
+    token = await token.split(' ')[1];
+    const secretKey = process.env.SESSION_SECRET as string;
+
+    let decoded = await jwt.verify(token, secretKey);
+    if (!decoded) {
+      return NextResponse.json({
+        message: 'verification error',
+        statu: 403,
+      });
+    }
+
+    const reqBody = await request.json();
+
+    const today = new Date();
     const blog = await BlogModel.create({
-      title,
-      thumbnail,
-      content,
-      categories,
-      publishedDate,
+      title: reqBody.title,
+      description: reqBody.description,
+      keyword: reqBody.keyword,
+      content: reqBody.content,
+      thumbnail: reqBody.thumbnail,
+      publishedDate: today,
       lastModified: today,
-      status,
-      contentImg,
+      author: reqBody.author,
+      status: reqBody.status,
     });
+
     return NextResponse.json(
       { message: 'Created Blog', blog: blog },
       { status: 201 },
     );
   } catch (error) {
+    console.log(error);
     return NextResponse.json({ message: 'server error' }, { status: 500 });
   }
 }
