@@ -1,6 +1,9 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { getServices } from '@/app/utils/assistFunctions/serviceFunction';
+import {
+  getServices,
+  getAvailableServices,
+} from '@/app/utils/assistFunctions/serviceFunction';
 import { IService } from '@/app/constants/type';
 import { LoadingWheel } from '../ConditionalComponents/LoadingWheel';
 import { ServiceCard } from '../CardComponents/ServiceCard';
@@ -12,7 +15,7 @@ export const ServiceBody = () => {
   useEffect(() => {
     const fetchService = async () => {
       try {
-        const services = await getServices();
+        const services: IService[] = await getAvailableServices();
         await setServiceList(services);
         await setLoad(false);
       } catch (error) {

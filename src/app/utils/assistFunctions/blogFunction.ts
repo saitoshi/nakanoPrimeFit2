@@ -2,6 +2,8 @@
  * @name All of the functions related to blog features
  */
 
+import { IBlog } from '@/app/constants/type';
+
 /**
  * @name getBlogs
  * @desc A function that calls all of the blog related API and returns all of the blogs available
@@ -56,4 +58,26 @@ export async function getRecentBlogs() {
   } catch (error) {
     return error;
   }
+}
+
+/**
+ * @name getAvailableBlogs()
+ * @desc gets all of the available blogs
+ * @return blogList
+ */
+export async function getAvailableBlogs() {
+  try {
+    const blogList: IBlog[] = [];
+    const blogResponses = await fetch('api/blog', {
+      method: 'GET',
+    });
+
+    const blogData = await blogResponses.json();
+    for (let i = 0; i < blogData['blogs'].length; i++) {
+      if (blogData['blogs'][i].status === 'released') {
+        await blogList.push(blogData['blogs'][i]);
+      }
+    }
+    return blogList;
+  } catch (error) {}
 }

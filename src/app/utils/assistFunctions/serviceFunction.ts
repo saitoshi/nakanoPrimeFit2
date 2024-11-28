@@ -1,3 +1,4 @@
+import { IService } from '@/app/constants/type';
 import { getToken } from './userFunctions';
 
 /**
@@ -7,7 +8,6 @@ import { getToken } from './userFunctions';
  */
 export async function getServices() {
   try {
-    await console.log(process.env.URL);
     const serviceResponses = await fetch('api/service', {
       method: 'GET',
     });
@@ -50,6 +50,31 @@ export async function updateService(_id: string) {
   try {
     const token = await getToken();
   } catch (error) {
+    return error;
+  }
+}
+
+/**
+ * @name getAvailableServices()
+ * @desc gets all of the services that are available to the public
+ * @return serviceList
+ */
+export async function getAvailableServices() {
+  try {
+    const serviceList: IService[] = [];
+    const serviceResponses = await fetch('api/service', {
+      method: 'GET',
+    });
+    const serviceData = await serviceResponses.json();
+    await console.log(serviceData['services'][0].status);
+    for (let i = 0; i < serviceData['services'].length; i++) {
+      if (serviceData['services'][i].status === 'released') {
+        await serviceList.push(serviceData['services'][i]);
+      }
+    }
+    return serviceList;
+  } catch (error) {
+    console.log(error);
     return error;
   }
 }
