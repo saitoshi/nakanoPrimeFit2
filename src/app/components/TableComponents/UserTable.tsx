@@ -76,7 +76,9 @@ export const UserTable = () => {
                   <th>{user.email}</th>
                   <th>{user.createdAt.toString().split('T')[0]}</th>
                   <th>{user.lastLoggedIn.toString().split('T')[0]}</th>
-                  <th></th>
+                  <th>
+                    <button className='edit-button'>&#x270E;</button>
+                  </th>
                 </tr>
               );
             })}

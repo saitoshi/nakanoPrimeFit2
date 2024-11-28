@@ -7,7 +7,7 @@ import { BlogForm } from '../FormRelated/BlogForm';
 import { ServiceForm } from '../FormRelated/ServiceForm';
 import './style.css';
 import { useMedia } from 'react-use';
-
+import { ServiceTable } from '../TableComponents/ServiceTable';
 export const DashboardMenu = () => {
   interface ITab {
     title: string;
@@ -93,6 +93,15 @@ export const DashboardMenu = () => {
                   : { display: 'none' }
               }>
               <BlogTable />
+            </div>
+            <div
+              className='tabContent'
+              style={
+                currentTab == 'serviceList'
+                  ? { display: 'block' }
+                  : { display: 'none' }
+              }>
+              <ServiceTable />
             </div>
             <div
               className='tabContent'
@@ -190,7 +199,7 @@ export const DashboardMenu = () => {
             <UserForm />
           </div>
           <div
-            className='tabContent'
+            className='mobileTabBody'
             style={
               currentTab == 'userList'
                 ? { display: 'block' }
@@ -199,7 +208,7 @@ export const DashboardMenu = () => {
             <UserTable />
           </div>
           <div
-            className='tabContent'
+            className='mobileTabBody'
             style={
               currentTab == 'blogList'
                 ? { display: 'block' }
@@ -208,13 +217,22 @@ export const DashboardMenu = () => {
             <BlogTable />
           </div>
           <div
-            className='tabContent'
+            className='mobileTabBody'
             style={
               currentTab == 'addBlog'
                 ? { display: 'block' }
                 : { display: 'none' }
             }>
             <BlogForm />
+          </div>
+          <div
+            className='mobileTabBody'
+            style={
+              currentTab == 'serviceList'
+                ? { display: 'block' }
+                : { display: 'none' }
+            }>
+            <ServiceTable />
           </div>
         </div>
       )}

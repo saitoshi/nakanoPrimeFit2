@@ -33,8 +33,8 @@ export default function Login() {
         setIsError(true);
       } else if (userData['status'] == 200) {
         await setToken(userData['token']);
-        setIsLoading(false);
-        router.push('/dashboard');
+        await setIsLoading(false);
+        await router.push('/dashboard');
       } else {
         setIsError(true);
       }

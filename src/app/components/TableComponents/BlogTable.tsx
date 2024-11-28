@@ -53,14 +53,16 @@ export const BlogTable = () => {
                   <th>{blog.title}</th>
                   <th className='imageHolder'>
                     <img
-                      className='tableThumbnail'
+                      className='imgResponsive'
                       src={blog.thumbnail}
                       alt='Thumbnail Image For The Blog'
                     />
                   </th>
                   <th>{blog.status}</th>
                   <th>{blog.publishedDate.toString().split('T')[0]}</th>
-                  <th></th>
+                  <th>
+                    <button className='edit-button'>&#x270E;</button>
+                  </th>
                 </tr>
               );
             })}
