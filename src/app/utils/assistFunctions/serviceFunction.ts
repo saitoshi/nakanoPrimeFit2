@@ -7,7 +7,8 @@ import { getToken } from './userFunctions';
  */
 export async function getServices() {
   try {
-    const serviceResponses = await fetch(process.env.URL + 'api/service', {
+    await console.log(process.env.URL);
+    const serviceResponses = await fetch('api/service', {
       method: 'GET',
     });
     const serviceData = await serviceResponses.json();

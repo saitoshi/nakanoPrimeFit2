@@ -29,6 +29,18 @@ export const ServiceBody = () => {
         <LoadingWheel />
       </div>
     );
+  } else if (serviceList === undefined) {
+    return (
+      <div className='pageContainer'>
+        <h2>
+          <p className='subHeader'>SERVICE</p>
+          <p className='mainHeader'>提供サービス</p>
+          <p className='pageDescription'>
+            エラーが発生いたしました。後ほど、もう一度確認してください。
+          </p>
+        </h2>
+      </div>
+    );
   } else if (error) {
     return (
       <div className='pageContainer'>
