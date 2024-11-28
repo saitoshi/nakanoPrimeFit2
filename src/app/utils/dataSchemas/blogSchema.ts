@@ -13,7 +13,6 @@ const blogSchema = new mongoose.Schema({
     type: String,
     enum: ['draft', 'released', 'private'],
     required: true,
-    default: 'draft',
   },
 });
 

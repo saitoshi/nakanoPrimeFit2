@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { getBlogs } from '../utils/assistFunctions/blogFunction';
+import { getAvailableBlogs } from '../utils/assistFunctions/blogFunction';
 import './style.css';
 import { LoadingWheel } from '../components/ConditionalComponents/LoadingWheel';
 import { IBlog } from '../constants/type';
@@ -8,11 +8,11 @@ import { BlogCard } from '../components/CardComponents/BlogCard';
 import { Footer } from '../components/Footer/Footer';
 export default function Blog() {
   const [isLoad, setIsLoad] = useState<boolean>(true);
-  const [blogList, setBlogList] = useState<[IBlog]>();
+  const [blogList, setBlogList] = useState<IBlog[]>();
 
   useEffect(() => {
     const fetchBlogs = async () => {
-      const blogs = await getBlogs();
+      const blogs = await getAvailableBlogs();
       setBlogList(blogs);
       setIsLoad(false);
     };
