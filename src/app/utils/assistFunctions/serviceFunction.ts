@@ -7,7 +7,7 @@ import { getToken } from './userFunctions';
  */
 export async function getServices() {
   try {
-    const serviceResponses = await fetch('api/service', {
+    const serviceResponses = await fetch(process.env.URL + 'api/service', {
       method: 'GET',
     });
     const serviceData = await serviceResponses.json();
@@ -26,13 +26,15 @@ export async function getServices() {
  */
 export async function getService(_id: string) {
   try {
-    const serviceResponse = await fetch(`api/service/id=${_id}`, {
-      method: 'GET',
-    });
+    const serviceResponse = await fetch(
+      process.env.URL + `api/service/id=${_id}`,
+      {
+        method: 'GET',
+      },
+    );
     const serviceData = await serviceResponse.json();
-    await console.log(serviceData['services']);
 
-    return serviceData['services'];
+    return serviceData['service'];
   } catch (error) {
     console.error(error);
     return error;

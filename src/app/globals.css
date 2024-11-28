@@ -236,6 +236,16 @@ body {
   font-size: 36px;
   font-weight: 700;
 }
+
+.imgBox {
+  width: 100%;
+}
+
+.imgResponsive {
+  margin-right: auto;
+  margin-left: auto;
+  vertical-align: middle;
+}
 @media screen and (max-width: 700px) {
   #serviceSectionContainer h2,
   #ownerSectionContainer h2,
@@ -250,6 +260,7 @@ body {
   .rowSplit {
     flex-direction: column;
   }
+  .threeCol,
   .smlRightCol,
   .bigLeftCol {
     flex: 0 0 100%;
