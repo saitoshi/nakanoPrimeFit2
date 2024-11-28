@@ -15,7 +15,7 @@ export async function getBlogs() {
 
     const blogData = await blogResponses.json();
     await console.log(blogData['blogs']);
-    return blogData['blogs'];
+    return blogData['blogs'].reverse();
   } catch (error) {
     return error;
   }
@@ -37,4 +37,23 @@ export async function getBlog(_id: string) {
     await console.log(blogData['blog']);
     return blogData['blog'];
   } catch (error) {}
+}
+
+/**
+ * @name getRecentBlogs
+ * @desc A function that calls all of the blog related API and returns all of the blogs available
+ * @return blogLists
+ */
+export async function getRecentBlogs() {
+  try {
+    const blogResponses = await fetch(process.env.URL + 'api/blog', {
+      method: 'GET',
+    });
+
+    const blogData = await blogResponses.json();
+    await console.log(blogData['blogs']);
+    return blogData['blogs'].reverse().slice(0, 3);
+  } catch (error) {
+    return error;
+  }
 }

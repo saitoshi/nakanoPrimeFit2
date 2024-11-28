@@ -1,8 +1,12 @@
 import type { Metadata } from 'next';
 import { IBlog } from '@/app/constants/type';
+import { RecentBlogList } from '@/app/components/BlogRelated/RelatedBlog';
 import './style.css';
 type tParams = Promise<{ _id: string }>;
-import { getBlog } from '@/app/utils/assistFunctions/blogFunction';
+import {
+  getBlog,
+  getRecentBlogs,
+} from '@/app/utils/assistFunctions/blogFunction';
 import { ErrorMsg } from '@/app/components/ConditionalComponents/Error';
 import { Footer } from '@/app/components/Footer/Footer';
 
@@ -32,6 +36,8 @@ export const generateMetadata = async (props: {
 export default async function Page(props: { params: tParams }) {
   const { _id } = await props.params;
   const blogInfo: IBlog = await getBlog(_id);
+  const recentBlogs: IBlog[] = await getRecentBlogs();
+  await console.log(recentBlogs);
   if (blogInfo === undefined || blogInfo === null) {
     return (
       <>
@@ -94,6 +100,8 @@ export default async function Page(props: { params: tParams }) {
             },
           )}
         </div>
+        <br />
+        <RecentBlogList blogs={recentBlogs} />
       </div>
       <Footer />
     </>
