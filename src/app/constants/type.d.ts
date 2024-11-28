@@ -49,7 +49,13 @@ export interface IBlog {
   thumbnail: string;
   keyword: string[];
   content: [
-    { header?: string; body?: string; image?: string; imageDesc?: string },
+    {
+      number: number;
+      header?: string;
+      body?: string;
+      image?: string;
+      imageDesc?: string;
+    },
   ];
   publishedDate: Date;
   lastModified: Date;

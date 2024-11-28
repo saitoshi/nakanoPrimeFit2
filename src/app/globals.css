@@ -245,6 +245,7 @@ body {
   margin-right: auto;
   margin-left: auto;
   vertical-align: middle;
+  max-width: 80%;
 }
 @media screen and (max-width: 700px) {
   #serviceSectionContainer h2,

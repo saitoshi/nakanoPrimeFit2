@@ -29,10 +29,12 @@ export async function getBlogs() {
  */
 export async function getBlog(_id: string) {
   try {
-    const blogResponse = await fetch('api/blog/' + { _id }, {
+    await console.log(_id);
+    const blogResponse = await fetch(process.env.URL + `/api/blog/id=${_id}`, {
       method: 'GET',
     });
     const blogData = await blogResponse.json();
-    return blogData;
+    await console.log(blogData['blog']);
+    return blogData['blog'];
   } catch (error) {}
 }

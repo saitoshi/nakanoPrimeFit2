@@ -27,7 +27,6 @@ export const generateMetadata = async (props: {
 export default async function Page(props: { params: tParams }) {
   let error: boolean = false;
   const { _id } = await props.params;
-  await console.log(_id);
   const serviceInfo = await getService(_id);
   await console.log(serviceInfo);
   if (serviceInfo == null) {
