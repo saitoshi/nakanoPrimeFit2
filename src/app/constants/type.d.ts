@@ -6,12 +6,14 @@ export interface IService {
   images?: string[];
   steps: [
     {
+      _id?: number;
       title?: string;
       description?: string;
     },
   ];
   costs: [
     {
+      _id?: number;
       title?: string;
       cost?: string;
     },
@@ -19,12 +21,14 @@ export interface IService {
   campaign?: string[];
   benefits?: [
     {
+      _id?: number;
       title?: string;
       description?: string;
     },
   ];
   reviews?: [
     {
+      _id?: number;
       title?: string;
       description?: string;
     },
