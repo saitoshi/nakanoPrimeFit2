@@ -27,21 +27,20 @@ export interface ILocation {
   access: string;
 }
 
+export interface IParagraph {
+  id?: number;
+  header?: string;
+  body?: string;
+  image?: string;
+  imageDesc?: string;
+}
 export interface IBlog {
   _id: any;
   title: string;
   description: string;
   thumbnail: string;
   keyword: string[];
-  content: [
-    {
-      number: number;
-      header?: string;
-      body?: string;
-      image?: string;
-      imageDesc?: string;
-    },
-  ];
+  content: IParagraph[];
   publishedDate: Date;
   lastModified: Date;
   status: string;
