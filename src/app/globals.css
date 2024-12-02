@@ -271,7 +271,8 @@ textarea,
 
 .addRowButton {
   background-color: rgba(69, 242, 255, 1);
-  color: white;
+  color: #333;
+  font-weight: 700;
   font-size: 16px;
   text-align: center;
   border-radius: 10px;

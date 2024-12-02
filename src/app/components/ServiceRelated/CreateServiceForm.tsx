@@ -7,11 +7,6 @@ import { LoadingWheel } from '../ConditionalComponents/LoadingWheel';
 export const CreateServiceForm = () => {
   const [title, setTitle] = useState<IService['title']>('');
   const [description, setDesc] = useState<IService['description']>('');
-  interface stepDetail {
-    _id: number;
-    title?: string;
-    description?: string;
-  }
   const stepsRow = [{ _id: 1 }, { _id: 2 }, { _id: 3 }];
   const [steps, setSteps] = useState<IService['steps']>(stepsRow);
 
@@ -23,19 +18,18 @@ export const CreateServiceForm = () => {
     setCosts(costHolder);
   };
   const [benefits, setBenefits] = useState<IService['benefits']>([]);
-  const addBenefits = () => {};
+  const addBenefits = () => {
+    const tempBenefit = [...benefits];
+    tempBenefit.push({ _id: benefits.length + 1 });
+    setBenefits(tempBenefit);
+  };
 
-  const [reviews, setReviews] = useState<IService['reviews']>();
-  let reviewNumber: number = 0;
-  interface reviewDetail {
-    _id: number;
-    title?: string;
-    description?: string;
-  }
-  const reviewHolder: reviewDetail[] = [];
+  const [reviews, setReviews] = useState<IService['reviews']>([]);
+
   const addReviews = () => {
-    reviewNumber++;
-    reviewHolder.push({ _id: reviewNumber });
+    const tempReview = [...reviews];
+    tempReview.push({ _id: tempReview.length + 1 });
+    setReviews(tempReview);
   };
 
   const [status, setStatus] = useState<IService['status']>();
@@ -77,6 +71,49 @@ export const CreateServiceForm = () => {
           onChange={(e: any) => {
             setDesc(e.target.value);
           }}></textarea>
+        <label htmlFor='title' className='formHeader'>
+          サービス用のサムネ画像
+        </label>
+        <input type='file' name='serviceThumbnail'></input>
+        <label id='benefits' className='formHeader'>
+          おすすめな理由の設定
+        </label>
+        <table className='inputTable'>
+          <thead>
+            <tr>
+              <th>理由のヘッドライン</th>
+              <th>理由の説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            {benefits.map((benefit) => {
+              return (
+                <tr key={benefit._id}>
+                  <td>
+                    <input
+                      placeholder='(例：「質の高いトレーニング」を提供します。
+)'></input>
+                  </td>
+                  <td>
+                    <textarea
+                      placeholder='(例：しんどい筋トレだけでなく、一人、ひとりの体の状態に応じてストレッチやご自宅での運動も指導いたします。
+。'></textarea>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        <div className='addRowContainer'>
+          <button
+            onClick={() => {
+              addBenefits();
+            }}
+            className='addRowButton'
+            id='addCostButton'>
+            進める理由を追加する
+          </button>
+        </div>
         <label id='steps' className='formHeader'>
           サービスの流れ
         </label>
@@ -89,7 +126,7 @@ export const CreateServiceForm = () => {
             </tr>
           </thead>
           <tbody>
-            {stepsRow.map((step: stepDetail) => {
+            {stepsRow.map((step) => {
               return (
                 <tr key={step._id}>
                   <td>{step._id}</td>
@@ -104,7 +141,7 @@ export const CreateServiceForm = () => {
             })}
           </tbody>
         </table>
-        <label id='steps' className='formHeader'>
+        <label id='costs' className='formHeader'>
           サービスの料金設定
         </label>
         <table className='inputTable'>
@@ -122,7 +159,7 @@ export const CreateServiceForm = () => {
                     <input name='priceType' placeholder='(例：回数券)'></input>
                   </th>
                   <th>
-                    <input></input>
+                    <input placeholder='(例: 9,000円)'></input>
                   </th>
                 </tr>
               );
@@ -143,6 +180,44 @@ export const CreateServiceForm = () => {
         <label id='steps' className='formHeader'>
           サービスの感想の追加
         </label>
+        <table className='inputTable'>
+          <thead>
+            <tr>
+              <th>キーフレーズ</th>
+              <th>感想内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            {reviews.map((review) => {
+              return (
+                <tr key={review._id}>
+                  <th>
+                    <input
+                      name='priceType'
+                      placeholder='(例：3ヶ月で−4kg)'></input>
+                  </th>
+                  <th>
+                    <input placeholder='(例: パーソナルトレーニングで利用。トレーナーによる適切な食事管理と週1回の筋トレで3ヶ月で−4kg。仕事の関係で自宅での筋トレとウォーキング程度しか出来ないのでまずまずの結果に満足。トレーナーの知識も豊富で、疑問点・不安な点等、親切丁寧に教えてもらえます。) '></input>
+                  </th>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        <div className='addRowContainer'>
+          <button
+            onClick={() => {
+              addReviews();
+            }}
+            className='addRowButton'
+            id='addCostButton'>
+            感想を追加する
+          </button>
+        </div>
+        {error ? <span className='errorMsg'></span> : <></>}
+        <div style={{ textAlign: 'center' }}>
+          <button id='submitButton'>サービスを登録する</button>
+        </div>
       </div>
     </>
   );
