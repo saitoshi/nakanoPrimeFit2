@@ -1,53 +1,60 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { IService } from '@/app/constants/type';
-import { getToken } from '@/app/utils/assistFunctions/userFunctions';
-import { LoadingWheel } from '../ConditionalComponents/LoadingWheel';
+import { LoadingWheel } from '../../ConditionalComponents/LoadingWheel';
 
-export const CreateServiceForm = () => {
-  const [title, setTitle] = useState<IService['title']>('');
-  const [description, setDesc] = useState<IService['description']>('');
-  const [thumbnail, setThumbnail] = useState<IService['thumbnail']>();
-  const stepsRow = [{ _id: 1 }, { _id: 2 }, { _id: 3 }];
-  const [steps, setSteps] = useState<IService['steps']>(stepsRow);
-
-  const costHolder = [{ _id: 1 }];
-  const [costs, setCosts] = useState<IService['costs']>(costHolder);
+interface serviceInputs {
+  service: IService;
+}
+export const EditServiceForm = ({ service }: serviceInputs) => {
+  const [title, setTitle] = useState<IService['title']>(service.title);
+  const [description, setDesc] = useState<IService['description']>(
+    service.description,
+  );
+  const [steps, setSteps] = useState<IService['steps']>(service.steps);
+  const [costs, setCosts] = useState<IService['costs']>(service.costs);
   const addCost = () => {
     const costHolder = [...costs];
     costHolder.push({ _id: costs.length + 1 });
     setCosts(costHolder);
   };
-  const [benefits, setBenefits] = useState<IService['benefits']>([]);
+  const [benefits, setBenefits] = useState<IService['benefits']>(
+    service.benefits,
+  );
   const addBenefits = () => {
     const tempBenefit = [...benefits];
     tempBenefit.push({ _id: benefits.length + 1 });
     setBenefits(tempBenefit);
   };
-
-  const [reviews, setReviews] = useState<IService['reviews']>([]);
-
+  const [reviews, setReviews] = useState<IService['reviews']>(service.reviews);
   const addReviews = () => {
     const tempReview = [...reviews];
     tempReview.push({ _id: tempReview.length + 1 });
     setReviews(tempReview);
   };
-
   const [status, setStatus] = useState<IService['status']>();
 
-  // conditional variable declaration
+  // conditional variable set up
   const [load, setLoad] = useState<boolean>(false);
   const [verified, setVerified] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
-
+  // a hook to submit the form
+  const submitNewService = async (e: any) => {
+    try {
+      await setLoad(true);
+    } catch (error) {
+      await setError(true);
+    } finally {
+      await setLoad(false);
+    }
+  };
   if (load) {
     return (
       <>
         <LoadingWheel />
       </>
     );
-  } else if (!load && !verified) {
   }
   return (
     <>
@@ -59,7 +66,7 @@ export const CreateServiceForm = () => {
           type='title'
           id='title'
           name='title'
-          placeholder='サービス名を入力'
+          placeholder={title}
           onChange={(e: any) => {
             setTitle(e.target.value);
           }}></input>
@@ -68,7 +75,7 @@ export const CreateServiceForm = () => {
         </label>
         <textarea
           name='description'
-          placeholder='サービスの概要の入力'
+          placeholder={description}
           onChange={(e: any) => {
             setDesc(e.target.value);
           }}></textarea>
@@ -76,6 +83,9 @@ export const CreateServiceForm = () => {
           サービス用のサムネ画像
         </label>
         <input type='file' name='serviceThumbnail'></input>
+        <b>サムネのプレビュー</b>
+        <br />
+        <img src={service.thumbnail} className='previewSize' />
         <label id='benefits' className='formHeader'>
           おすすめな理由の設定
         </label>
@@ -127,7 +137,7 @@ export const CreateServiceForm = () => {
             </tr>
           </thead>
           <tbody>
-            {stepsRow.map((step) => {
+            {steps.map((step) => {
               return (
                 <tr key={step._id}>
                   <td>{step._id}</td>
