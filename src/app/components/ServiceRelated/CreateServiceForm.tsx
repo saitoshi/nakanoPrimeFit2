@@ -8,20 +8,20 @@ export const CreateServiceForm = () => {
   const [title, setTitle] = useState<IService['title']>('');
   const [description, setDesc] = useState<IService['description']>('');
   const [thumbnail, setThumbnail] = useState<IService['thumbnail']>();
-  const stepsRow = [{ _id: 1 }, { _id: 2 }, { _id: 3 }];
+  const stepsRow = [{ id: 1 }, { id: 2 }, { id: 3 }];
   const [steps, setSteps] = useState<IService['steps']>(stepsRow);
 
-  const costHolder = [{ _id: 1 }];
+  const costHolder = [{ id: 1 }];
   const [costs, setCosts] = useState<IService['costs']>(costHolder);
   const addCost = () => {
     const costHolder = [...costs];
-    costHolder.push({ _id: costs.length + 1 });
+    costHolder.push({ id: costs.length + 1 });
     setCosts(costHolder);
   };
   const [benefits, setBenefits] = useState<IService['benefits']>([]);
   const addBenefits = () => {
     const tempBenefit = [...benefits];
-    tempBenefit.push({ _id: benefits.length + 1 });
+    tempBenefit.push({ id: benefits.length + 1 });
     setBenefits(tempBenefit);
   };
 
@@ -29,7 +29,7 @@ export const CreateServiceForm = () => {
 
   const addReviews = () => {
     const tempReview = [...reviews];
-    tempReview.push({ _id: tempReview.length + 1 });
+    tempReview.push({ id: tempReview.length + 1 });
     setReviews(tempReview);
   };
 
@@ -89,7 +89,7 @@ export const CreateServiceForm = () => {
           <tbody>
             {benefits.map((benefit) => {
               return (
-                <tr key={benefit._id}>
+                <tr key={benefit.id}>
                   <td>
                     <input
                       placeholder='(例：「質の高いトレーニング」を提供します。
@@ -129,8 +129,8 @@ export const CreateServiceForm = () => {
           <tbody>
             {stepsRow.map((step) => {
               return (
-                <tr key={step._id}>
-                  <td>{step._id}</td>
+                <tr key={step.id}>
+                  <td>{step.id}</td>
                   <td>
                     <input></input>
                   </td>
@@ -155,7 +155,7 @@ export const CreateServiceForm = () => {
           <tbody>
             {costs.map((cost) => {
               return (
-                <tr key={cost._id}>
+                <tr key={cost.id}>
                   <th>
                     <input name='priceType' placeholder='(例：回数券)'></input>
                   </th>
@@ -191,7 +191,7 @@ export const CreateServiceForm = () => {
           <tbody>
             {reviews.map((review) => {
               return (
-                <tr key={review._id}>
+                <tr key={review.id}>
                   <th>
                     <input
                       name='priceType'

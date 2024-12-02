@@ -4,7 +4,6 @@ import { BlogTable } from '../TableComponents/BlogTable';
 import { UserTable } from '../TableComponents/UserTable';
 import { UserForm } from '../FormRelated/UserForm';
 import { BlogForm } from '../FormRelated/BlogForm';
-import { ServiceForm } from '../FormRelated/ServiceForm';
 import './style.css';
 import { useMedia } from 'react-use';
 import { ServiceTable } from '../TableComponents/ServiceTable';
@@ -136,9 +135,7 @@ export const DashboardMenu = () => {
                 currentTab == 'addService'
                   ? { display: 'block' }
                   : { display: 'none' }
-              }>
-              <ServiceForm />
-            </div>
+              }></div>
           </div>
         </div>
       ) : (
@@ -186,9 +183,7 @@ export const DashboardMenu = () => {
               currentTab == 'addService'
                 ? { display: 'block' }
                 : { display: 'none' }
-            }>
-            <ServiceForm />
-          </div>
+            }></div>
           <div
             className='mobileTabBody'
             style={

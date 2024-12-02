@@ -15,7 +15,7 @@ export const EditServiceForm = ({ service }: serviceInputs) => {
   const [costs, setCosts] = useState<IService['costs']>(service.costs);
   const addCost = () => {
     const costHolder = [...costs];
-    costHolder.push({ _id: costs.length + 1 });
+    costHolder.push({ id: costs.length + 1 });
     setCosts(costHolder);
   };
   const [benefits, setBenefits] = useState<IService['benefits']>(
@@ -23,13 +23,13 @@ export const EditServiceForm = ({ service }: serviceInputs) => {
   );
   const addBenefits = () => {
     const tempBenefit = [...benefits];
-    tempBenefit.push({ _id: benefits.length + 1 });
+    tempBenefit.push({ id: benefits.length + 1 });
     setBenefits(tempBenefit);
   };
   const [reviews, setReviews] = useState<IService['reviews']>(service.reviews);
   const addReviews = () => {
     const tempReview = [...reviews];
-    tempReview.push({ _id: tempReview.length + 1 });
+    tempReview.push({ id: tempReview.length + 1 });
     setReviews(tempReview);
   };
   const [status, setStatus] = useState<IService['status']>();
@@ -99,16 +99,12 @@ export const EditServiceForm = ({ service }: serviceInputs) => {
           <tbody>
             {benefits.map((benefit) => {
               return (
-                <tr key={benefit._id}>
+                <tr key={benefit.id}>
                   <td>
-                    <input
-                      placeholder='(例：「質の高いトレーニング」を提供します。
-)'></input>
+                    <input placeholder={benefit.title}></input>
                   </td>
                   <td>
-                    <textarea
-                      placeholder='(例：しんどい筋トレだけでなく、一人、ひとりの体の状態に応じてストレッチやご自宅での運動も指導いたします。
-。'></textarea>
+                    <textarea placeholder={benefit.description}></textarea>
                   </td>
                 </tr>
               );
@@ -139,13 +135,13 @@ export const EditServiceForm = ({ service }: serviceInputs) => {
           <tbody>
             {steps.map((step) => {
               return (
-                <tr key={step._id}>
-                  <td>{step._id}</td>
+                <tr key={step.id}>
+                  <td>{step.id}</td>
                   <td>
-                    <input></input>
+                    <input placeholder={step.title}></input>
                   </td>
                   <td>
-                    <textarea></textarea>
+                    <textarea placeholder={step.description}></textarea>
                   </td>
                 </tr>
               );
@@ -165,12 +161,12 @@ export const EditServiceForm = ({ service }: serviceInputs) => {
           <tbody>
             {costs.map((cost) => {
               return (
-                <tr key={cost._id}>
+                <tr key={cost.id}>
                   <th>
-                    <input name='priceType' placeholder='(例：回数券)'></input>
+                    <input name='priceType' placeholder={cost.title}></input>
                   </th>
                   <th>
-                    <input placeholder='(例: 9,000円)'></input>
+                    <input placeholder={cost.description}></input>
                   </th>
                 </tr>
               );
@@ -201,14 +197,12 @@ export const EditServiceForm = ({ service }: serviceInputs) => {
           <tbody>
             {reviews.map((review) => {
               return (
-                <tr key={review._id}>
+                <tr key={review.id}>
                   <th>
-                    <input
-                      name='priceType'
-                      placeholder='(例：3ヶ月で−4kg)'></input>
+                    <input name='priceType' placeholder={review.title}></input>
                   </th>
                   <th>
-                    <input placeholder='(例: パーソナルトレーニングで利用。トレーナーによる適切な食事管理と週1回の筋トレで3ヶ月で−4kg。仕事の関係で自宅での筋トレとウォーキング程度しか出来ないのでまずまずの結果に満足。トレーナーの知識も豊富で、疑問点・不安な点等、親切丁寧に教えてもらえます。) '></input>
+                    <input placeholder={review.description}></input>
                   </th>
                 </tr>
               );

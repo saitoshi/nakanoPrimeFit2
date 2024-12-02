@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { getServices } from '@/app/utils/assistFunctions/serviceFunction';
 import { IService } from '@/app/constants/type';
 import './style.css';
-
+import Link from 'next/link';
 export const ServiceTable = () => {
   const [isLoad, setIsLoad] = useState<boolean>(true);
   const [serviceList, setServiceList] = useState<IService[]>();
@@ -59,7 +59,13 @@ export const ServiceTable = () => {
                   <th></th>
                   <th>{service.publishedDate.toString().split('T')[0]}</th>
                   <th>
-                    <button className='edit-button'>&#x270E;</button>
+                    <button className='edit-button'>
+                      <Link
+                        href={`edit-service/${service._id}`}
+                        style={{ textDecoration: 'none' }}>
+                        &#x270E;
+                      </Link>
+                    </button>
                   </th>
                 </tr>
               );

@@ -15,7 +15,7 @@ export interface IService {
 }
 
 export interface IDetail {
-  _id: number;
+  id: number;
   title?: string;
   description?: string;
 }
