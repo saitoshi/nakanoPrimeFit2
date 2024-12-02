@@ -214,6 +214,23 @@ export const CreateServiceForm = () => {
             感想を追加する
           </button>
         </div>
+        <label id='status' className='formHeader'>
+          サービスの公開状態 - 作成後にすぐに公開するか、しないか
+        </label>
+        <div className='formSelection'>
+          <input
+            type='radio'
+            id='status'
+            name='service_status'
+            value='draft'></input>
+          <label htmlFor='html'>非公開</label>
+          <input
+            type='radio'
+            id='status'
+            name='service_status'
+            value='released'></input>
+          <label htmlFor='html'>公開</label>
+        </div>
         {error ? <span className='errorMsg'></span> : <></>}
         <div style={{ textAlign: 'center' }}>
           <button id='submitButton'>サービスを登録する</button>
