@@ -18,7 +18,7 @@ export const EditUserForm = () => {
     <div id='editUserSection' className='pageContainer'>
       <h2>
         <p className='subHeader'>EDIT USER</p>
-        <p className='mainHeader'>ブログを編集する</p>
+        <p className='mainHeader'>ユーザーを編集する</p>
       </h2>
       <form id='editUserForm'></form>
     </div>

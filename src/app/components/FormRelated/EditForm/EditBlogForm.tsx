@@ -11,7 +11,10 @@ export const EditBlogForm = ({ blog }: blogInputs) => {
   const [description, setDescription] = useState<IBlog['description']>(
     blog.description,
   );
-
+  const [content, setContent] = useState<IBlog['content']>(blog.content);
+  const [thumbnail, setThumbnail] = useState<IBlog['thumbnail']>(
+    blog.thumbnail,
+  );
   /** Variable declaration for the conditional situations */
   const [isLoad, setIsLoad] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);

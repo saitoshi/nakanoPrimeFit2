@@ -1,9 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import {
-  getServices,
-  getAvailableServices,
-} from '@/app/utils/assistFunctions/serviceFunction';
+import { getAvailableServices } from '@/app/utils/assistFunctions/serviceFunction';
 import { IService } from '@/app/constants/type';
 import { LoadingWheel } from '../ConditionalComponents/LoadingWheel';
 import { ServiceCard } from '../CardComponents/ServiceCard';

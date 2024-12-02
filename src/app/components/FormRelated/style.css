@@ -2,14 +2,15 @@
 #blogForm {
   margin: 0 5px;
   font-size: 20px;
-
+  background-color: white;
   border-radius: 10px;
   padding: 0 10px 10px 10px;
 }
 form,
 input,
+label,
 textarea {
-  width: 90%;
+  width: 100%;
 }
 
 input,
