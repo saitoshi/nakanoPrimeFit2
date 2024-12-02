@@ -247,6 +247,43 @@ body {
   vertical-align: middle;
   max-width: 80%;
 }
+
+.formArea {
+  font-size: 20px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px 25px 10px 25px;
+  overflow: none;
+}
+
+form,
+input,
+label,
+textarea,
+.inputTable {
+  width: 100%;
+}
+
+.addRowContainer {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.addRowButton {
+  background-color: rgba(69, 242, 255, 1);
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 10px;
+  padding: 10px;
+}
+label {
+  font-weight: 800;
+}
+input,
+textarea {
+  background-color: whitesmoke;
+}
 @media screen and (max-width: 700px) {
   #serviceSectionContainer h2,
   #ownerSectionContainer h2,

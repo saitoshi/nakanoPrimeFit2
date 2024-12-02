@@ -12,7 +12,9 @@ label,
 textarea {
   width: 100%;
 }
-
+.inputTable {
+  text-align: center;
+}
 input,
 textarea {
   background-color: whitesmoke;

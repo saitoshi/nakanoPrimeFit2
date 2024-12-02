@@ -4,40 +4,21 @@ export interface IService {
   description: string;
   thumbnail: string;
   images?: string[];
-  steps: [
-    {
-      _id?: number;
-      title?: string;
-      description?: string;
-    },
-  ];
-  costs: [
-    {
-      _id?: number;
-      title?: string;
-      cost?: string;
-    },
-  ];
+  steps: IDetail[];
+  costs: IDetail[];
   campaign?: string[];
-  benefits?: [
-    {
-      _id?: number;
-      title?: string;
-      description?: string;
-    },
-  ];
-  reviews?: [
-    {
-      _id?: number;
-      title?: string;
-      description?: string;
-    },
-  ];
+  benefits?: IDetail[];
+  reviews?: IDetail[];
   publishedDate: Date;
   lastModified: Date;
   status: string;
 }
 
+export interface IDetail {
+  _id: number;
+  title?: string;
+  description?: string;
+}
 export interface ILocation {
   name: string;
   address: string;
