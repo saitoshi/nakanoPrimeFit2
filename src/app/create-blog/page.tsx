@@ -1,11 +1,15 @@
 import type { Metadata } from 'next';
-import { DashboardCreateMenu } from '../components/Dashboard Related/DashboardCreateMenu';
-export default function CreateBlog() {
+import { CreateBlog } from '../components/BlogRelated/CreateBlog';
+export default function Page() {
   return (
     <div>
       <div className='pageContainer'>
+        <h2>
+          <p className='subHeader'>CREATE BLOG</p>
+          <p className='mainHeader'>ブログ作成</p>
+        </h2>
         <br />
-        <DashboardCreateMenu />
+        <CreateBlog />
       </div>
     </div>
   );
