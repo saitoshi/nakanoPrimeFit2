@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { BlogTable } from '../TableComponents/BlogTable';
+import { BlogTable, BlogTable2 } from '../TableComponents/BlogTable';
 import { UserTable } from '../TableComponents/UserTable';
 import { UserForm } from '../FormRelated/UserForm';
 import { BlogForm } from '../FormRelated/BlogForm';
@@ -91,7 +91,7 @@ export const DashboardMenu = () => {
                   ? { display: 'block' }
                   : { display: 'none' }
               }>
-              <BlogTable />
+              <BlogTable2 />
             </div>
             <div
               className='tabContent'
