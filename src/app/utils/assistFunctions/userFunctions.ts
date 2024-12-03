@@ -28,5 +28,10 @@ export function removeToken() {
 }
 
 /**
- *
+ * @name verifyToken
+ * @desc Verifies the token from the localstorage to see if it is valid
+ * @return true or false
  */
+export async function verifyToken() {
+  const token = await getToken();
+}
