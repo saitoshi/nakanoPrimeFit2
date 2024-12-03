@@ -34,4 +34,14 @@ export function removeToken() {
  */
 export async function verifyToken() {
   const token = await getToken();
+  const verifyResponse = await fetch('api/verify', {
+    headers: { Authorization: `Bearer: ${token}` },
+    method: 'GET',
+  });
+  const verification = await verifyResponse.json();
+  if (verification['status'] === 201) {
+    return true;
+  } else {
+    return false;
+  }
 }

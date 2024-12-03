@@ -1,8 +1,9 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { IService } from '@/app/constants/type';
-import { getToken } from '@/app/utils/assistFunctions/userFunctions';
+import { verifyToken } from '@/app/utils/assistFunctions/userFunctions';
 import { LoadingWheel } from '../ConditionalComponents/LoadingWheel';
+import { useRouter } from 'next/navigation';
 
 export const CreateServiceForm = () => {
   const [title, setTitle] = useState<IService['title']>('');
@@ -11,6 +12,7 @@ export const CreateServiceForm = () => {
   const stepsRow = [{ id: 1 }, { id: 2 }, { id: 3 }];
   const [steps, setSteps] = useState<IService['steps']>(stepsRow);
 
+  const router = useRouter();
   const costHolder = [{ id: 1 }];
   const [costs, setCosts] = useState<IService['costs']>(costHolder);
   const addCost = () => {
@@ -36,19 +38,28 @@ export const CreateServiceForm = () => {
   const [status, setStatus] = useState<IService['status']>();
 
   // conditional variable declaration
-  const [load, setLoad] = useState<boolean>(false);
-  const [verified, setVerified] = useState<boolean>(false);
+  const [load, setLoad] = useState<boolean>(true);
   const [success, setSuccess] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
 
+  useEffect(() => {
+    const verify = async () => {
+      const response = await verifyToken();
+      await setLoad(false);
+      if (!response) {
+        await router.push('/login');
+      }
+    };
+    verify();
+  }, []);
   if (load) {
     return (
       <>
         <LoadingWheel />
       </>
     );
-  } else if (!load && !verified) {
   }
+
   return (
     <>
       <div id='serviceForm' className='formArea'>

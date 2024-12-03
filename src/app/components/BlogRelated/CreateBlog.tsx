@@ -1,9 +1,11 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { IBlog } from '@/app/constants/type';
+import { verifyToken } from '@/app/utils/assistFunctions/userFunctions';
 import { LoadingWheel } from '../ConditionalComponents/LoadingWheel';
-
+import { useRouter } from 'next/navigation';
 export const CreateBlog = () => {
+  const router = useRouter();
   const [title, setTitle] = useState<IBlog['title']>();
   const [description, setDesc] = useState<IBlog['description']>();
   const [thumbnail, setThumbnail] = useState<IBlog['thumbnail']>();
@@ -44,10 +46,21 @@ export const CreateBlog = () => {
   };
   const [status, setStatus] = useState<IBlog['status']>();
   // conditional variable declaration
-  const [load, setLoad] = useState<boolean>(false);
-  const [verified, setVerified] = useState<boolean>(false);
+  const [load, setLoad] = useState<boolean>(true);
+
   const [success, setSuccess] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
+
+  useEffect(() => {
+    const verify = async () => {
+      const response = await verifyToken();
+      await setLoad(false);
+      if (!response) {
+        await router.push('/login');
+      }
+    };
+    verify();
+  }, []);
 
   const submitBlog = async (e: any) => {
     try {
