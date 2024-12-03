@@ -7,13 +7,40 @@ export const CreateBlog = () => {
   const [title, setTitle] = useState<IBlog['title']>();
   const [description, setDesc] = useState<IBlog['description']>();
   const [thumbnail, setThumbnail] = useState<IBlog['thumbnail']>();
-  const [keyword, setKeyword] = useState<IBlog['keyword']>([]);
-  const [keywordHolder, setKeywordHolder] = useState<[]>();
+  const [keyword, setKeyword] = useState<IBlog['keyword']>();
+  const [keywordHolder, setKeywordHolder] = useState<string>();
   const [content, setContent] = useState<IBlog['content']>([]);
   const addContent = () => {
     const contentHolder = [...content];
     contentHolder.push({ id: content.length + 1 });
     setContent(contentHolder);
+  };
+
+  const updateContent = async (e: any, id: number, value: string) => {
+    const tempContent = [...content];
+    await console.log(e.target.value);
+    let index = 0;
+    for (let i = 0; i < content.length; i++) {
+      if (content[i].id === id) {
+        index = i;
+      }
+    }
+    await console.log(index);
+    switch (value) {
+      case 'header':
+        tempContent[index].header = e.target.value;
+        break;
+      case 'body':
+        tempContent[index].body = e.target.value;
+        break;
+      case 'image':
+        tempContent[index].image = e.target.value;
+        break;
+      default:
+        tempContent[index].imageDesc = e.target.value;
+    }
+    await setContent(tempContent);
+    await console.log(content);
   };
   const [status, setStatus] = useState<IBlog['status']>();
   // conditional variable declaration
@@ -21,6 +48,27 @@ export const CreateBlog = () => {
   const [verified, setVerified] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
+
+  const submitBlog = async (e: any) => {
+    try {
+      e.preventDefault();
+      await setLoad(true);
+      let keywordList = await keywordHolder.split(',');
+      await setKeyword(keywordList);
+      await console.log(
+        title,
+        description,
+        thumbnail,
+        keyword,
+        content,
+        status,
+      );
+    } catch (error) {
+      await setError(true);
+    } finally {
+      await setLoad(false);
+    }
+  };
 
   if (load) {
     return (
@@ -45,7 +93,12 @@ export const CreateBlog = () => {
         <label htmlFor='title' className='formHeader'>
           ブログ用のメイン画像
         </label>
-        <input type='file' name='serviceThumbnail'></input>
+        <input
+          type='file'
+          name='serviceThumbnail'
+          onChange={(e: any) => {
+            setThumbnail(e.target.value);
+          }}></input>
         <label htmlFor='description' className='description'>
           ブログの概要
         </label>
@@ -76,10 +129,32 @@ export const CreateBlog = () => {
               <input
                 type='text'
                 id='contentHeader'
-                placeholder='ブログの段落のヘッダー'></input>
+                placeholder='ブログの段落のヘッダー'
+                onChange={(e: any) => {
+                  updateContent(e, paragraph.id, 'header');
+                }}></input>
               <textarea
                 className='contentText'
-                placeholder='ブログの段落の文書'></textarea>
+                placeholder='ブログの段落の文書'
+                onChange={(e: any) => {
+                  updateContent(e, paragraph.id, 'body');
+                }}></textarea>
+              <label htmlFor='title' className='formHeader'>
+                ブログ用の段落用画像
+              </label>
+              <input
+                type='file'
+                name='paragraphImage'
+                onChange={(e: any) => {
+                  updateContent(e, paragraph.id, 'image');
+                }}></input>
+              <input
+                type='text'
+                id='paragraphImageDesc'
+                placeholder='段落画像の説明文'
+                onChange={(e: any) => {
+                  updateContent(e, paragraph.id, 'imageDesc');
+                }}></input>
             </div>
           );
         })}
@@ -91,6 +166,38 @@ export const CreateBlog = () => {
             className='addRowButton'
             id='addCostButton'>
             段落を追加する
+          </button>
+        </div>
+        <label id='status' className='formHeader'>
+          サービスの公開状態 - 作成後にすぐに公開するか、しないか
+        </label>
+        <div className='formSelection'>
+          <input
+            type='radio'
+            id='status'
+            name='service_status'
+            value='draft'
+            onChange={(e: any) => {
+              setStatus(e.target.value);
+            }}></input>
+          <label htmlFor='html'>非公開</label>
+          <input
+            type='radio'
+            id='status'
+            name='service_status'
+            value='released'
+            onChange={(e: any) => {
+              setStatus(e.target.value);
+            }}></input>
+          <label htmlFor='html'>公開</label>
+        </div>
+        <div style={{ textAlign: 'center' }}>
+          <button
+            id='submitButton'
+            onClick={(e: any) => {
+              submitBlog(e);
+            }}>
+            ブログ登録
           </button>
         </div>
       </div>
