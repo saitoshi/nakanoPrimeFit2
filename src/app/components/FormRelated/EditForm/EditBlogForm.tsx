@@ -1,5 +1,7 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { verifyToken } from '@/app/utils/assistFunctions/userFunctions';
+import { useRouter } from 'next/navigation';
 import { IBlog } from '@/app/constants/type';
 import { LoadingWheel } from '../../ConditionalComponents/LoadingWheel';
 
@@ -8,6 +10,7 @@ type blogInputs = {
 };
 export const EditBlogForm = ({ blog }: blogInputs) => {
   /** */
+  const router = useRouter();
   const [title, setTitle] = useState<IBlog['title']>(blog.title);
   const [description, setDesc] = useState<IBlog['description']>(
     blog.description,
@@ -22,6 +25,16 @@ export const EditBlogForm = ({ blog }: blogInputs) => {
     contentHolder.push({ id: content.length + 1 });
     setContent(contentHolder);
   };
+  useEffect(() => {
+    const verify = async () => {
+      const response = await verifyToken();
+      await setLoad(false);
+      if (!response) {
+        await router.push('/login');
+      }
+    };
+    verify();
+  }, []);
 
   const updateContent = async (e: any, id: number, value: string) => {
     const tempContent = [...content];

@@ -1,19 +1,31 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import './style.css';
 import { LoadingWheel } from '../components/ConditionalComponents/LoadingWheel';
-import { setToken } from '../utils/assistFunctions/userFunctions';
+import { setToken, verifyToken } from '../utils/assistFunctions/userFunctions';
 import { IUser } from '../constants/type';
 export default function Login() {
   const [email, setEmail] = useState<IUser['email']>('');
   const [password, setPassword] = useState<IUser['password']>('');
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] =
     useState<string>('エラーが発生いたしました。');
 
   const router = useRouter();
+  useEffect(() => {
+    const verify = async () => {
+      const response = await verifyToken();
+      await setIsLoading(false);
+      if (!response) {
+        await router.push('/login');
+      } else {
+        await router.push('/dashboard');
+      }
+    };
+    verify();
+  }, []);
   const loginUser = async (e: any) => {
     try {
       e.preventDefault();

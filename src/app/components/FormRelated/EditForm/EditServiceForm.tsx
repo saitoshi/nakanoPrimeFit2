@@ -1,5 +1,7 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { verifyToken } from '@/app/utils/assistFunctions/userFunctions';
+import { useRouter } from 'next/navigation';
 import { IService } from '@/app/constants/type';
 import { LoadingWheel } from '../../ConditionalComponents/LoadingWheel';
 
@@ -7,6 +9,7 @@ interface serviceInputs {
   service: IService;
 }
 export const EditServiceForm = ({ service }: serviceInputs) => {
+  const router = useRouter();
   const [title, setTitle] = useState<IService['title']>(service.title);
   const [description, setDesc] = useState<IService['description']>(
     service.description,
@@ -33,7 +36,16 @@ export const EditServiceForm = ({ service }: serviceInputs) => {
     setReviews(tempReview);
   };
   const [status, setStatus] = useState<IService['status']>();
-
+  useEffect(() => {
+    const verify = async () => {
+      const response = await verifyToken();
+      await setLoad(false);
+      if (!response) {
+        await router.push('/login');
+      }
+    };
+    verify();
+  }, []);
   // conditional variable set up
   const [load, setLoad] = useState<boolean>(false);
   const [verified, setVerified] = useState<boolean>(false);
