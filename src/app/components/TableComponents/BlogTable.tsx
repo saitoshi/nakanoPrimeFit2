@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { getBlogs } from '@/app/utils/assistFunctions/blogFunction';
 import './style.css';
 import { IBlog } from '@/app/constants/type';
+import Link from 'next/link';
 
 export const BlogTable = () => {
   const [isLoad, setIsLoad] = useState<boolean>(true);
@@ -61,7 +62,11 @@ export const BlogTable = () => {
                   <th>{blog.status}</th>
                   <th>{blog.publishedDate.toString().split('T')[0]}</th>
                   <th>
-                    <button className='edit-button'>&#x270E;</button>
+                    <Link
+                      href={`/edit-blog/${blog._id}`}
+                      style={{ textDecoration: 'none' }}>
+                      <button className='edit-button'>&#x270E;</button>
+                    </Link>
                   </th>
                 </tr>
               );

@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { IService } from '@/app/constants/type';
 import { LoadingWheel } from '../../ConditionalComponents/LoadingWheel';
 
@@ -66,7 +66,7 @@ export const EditServiceForm = ({ service }: serviceInputs) => {
           type='title'
           id='title'
           name='title'
-          placeholder={title}
+          value={title}
           onChange={(e: any) => {
             setTitle(e.target.value);
           }}></input>
@@ -75,7 +75,7 @@ export const EditServiceForm = ({ service }: serviceInputs) => {
         </label>
         <textarea
           name='description'
-          placeholder={description}
+          value={description}
           onChange={(e: any) => {
             setDesc(e.target.value);
           }}></textarea>
@@ -101,10 +101,10 @@ export const EditServiceForm = ({ service }: serviceInputs) => {
               return (
                 <tr key={benefit.id}>
                   <td>
-                    <input placeholder={benefit.title}></input>
+                    <input value={benefit.title}></input>
                   </td>
                   <td>
-                    <textarea placeholder={benefit.description}></textarea>
+                    <textarea value={benefit.description}></textarea>
                   </td>
                 </tr>
               );
@@ -138,10 +138,10 @@ export const EditServiceForm = ({ service }: serviceInputs) => {
                 <tr key={step.id}>
                   <td>{step.id}</td>
                   <td>
-                    <input placeholder={step.title}></input>
+                    <input value={step.title}></input>
                   </td>
                   <td>
-                    <textarea placeholder={step.description}></textarea>
+                    <textarea value={step.description}></textarea>
                   </td>
                 </tr>
               );
