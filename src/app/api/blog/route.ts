@@ -5,9 +5,9 @@ import jwt from 'jsonwebtoken';
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
+    const input = request;
     await connectDB();
-    var blogMap: any = {};
-    blogMap = await BlogModel.find();
+    var blogMap = await BlogModel.find();
 
     return NextResponse.json(
       { message: 'blog list', blogs: blogMap },
@@ -33,7 +33,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     token = await token.split(' ')[1];
     const secretKey = process.env.SESSION_SECRET as string;
 
-    let decoded = await jwt.verify(token, secretKey);
+    const decoded = await jwt.verify(token, secretKey);
     if (!decoded) {
       return NextResponse.json({
         message: 'verification error',

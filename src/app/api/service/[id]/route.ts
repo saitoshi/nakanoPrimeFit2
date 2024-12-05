@@ -11,10 +11,9 @@ export async function GET(
   try {
     await connectDB();
     const route = (await params).id;
-    console.log(route);
     const serviceID = route.split('id=')[1];
     const _id = await new mongoose.Types.ObjectId(serviceID);
-    let service = await ServiceModel.findById(_id);
+    const service = await ServiceModel.findById(_id);
     return NextResponse.json(
       { message: 'Found Service', service: service },
       { status: 201 },
@@ -42,7 +41,7 @@ export async function POST(
     token = await token.split(' ')[1];
     const secretKey = process.env.SESSION_SECRET as string;
 
-    let decoded = await jwt.verify(token, secretKey);
+    const decoded = await jwt.verify(token, secretKey);
     if (!decoded) {
       return NextResponse.json({
         message: 'verification error',
@@ -50,9 +49,8 @@ export async function POST(
       });
     }
     const route = (await params).id;
-    console.log(route);
     const serviceID = route.split('id=')[1];
-    var _id = await new mongoose.Types.ObjectId(serviceID);
+    const _id = await new mongoose.Types.ObjectId(serviceID);
 
     const serviceInputs = await request.json();
     const today = new Date();

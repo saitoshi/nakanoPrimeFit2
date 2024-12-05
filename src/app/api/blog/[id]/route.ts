@@ -10,17 +10,10 @@ export async function GET(
 ) {
   try {
     const route = (await params).id;
-    console.log(route);
     const blogID = route.split('id=')[1];
-    var _id = await new mongoose.Types.ObjectId(blogID);
-    let blog = await BlogModel.findById(_id);
-    /** 
-    console.log(paramID);
-    const idParam = paramID.split('id=')[1];
-    console.log(idParam);
-    var _id = await new mongoose.Types.ObjectId(idParam);
-    let blog = await BlogModel.findById(_id);
-    */
+    const _id = await new mongoose.Types.ObjectId(blogID);
+    const blog = await BlogModel.findById(_id);
+
     return NextResponse.json(
       { message: 'blog list', blog: blog },
       { status: 201 },
@@ -48,7 +41,7 @@ export async function POST(
     token = await token.split(' ')[1];
     const secretKey = process.env.SESSION_SECRET as string;
 
-    let decoded = await jwt.verify(token, secretKey);
+    const decoded = await jwt.verify(token, secretKey);
     if (!decoded) {
       return NextResponse.json({
         message: 'verification error',
@@ -56,9 +49,8 @@ export async function POST(
       });
     }
     const route = (await params).id;
-    console.log(route);
     const blogID = route.split('id=')[1];
-    var _id = await new mongoose.Types.ObjectId(blogID);
+    const _id = await new mongoose.Types.ObjectId(blogID);
 
     const reqBody = await request.json();
     const today = new Date();
