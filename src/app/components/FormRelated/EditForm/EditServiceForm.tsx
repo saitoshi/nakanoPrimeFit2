@@ -13,6 +13,7 @@ interface serviceInputs {
 }
 export const EditServiceForm = ({ service }: serviceInputs) => {
   const router = useRouter();
+
   const [title, setTitle] = useState<IService['title']>(service.title);
   const [description, setDesc] = useState<IService['description']>(
     service.description,
@@ -94,7 +95,7 @@ export const EditServiceForm = ({ service }: serviceInputs) => {
   };
   // conditional variable set up
   const [load, setLoad] = useState<boolean>(false);
-  const [verified, setVerified] = useState<boolean>(false);
+  const [verified, setVerified] = useState<boolean>(true);
   const [success, setSuccess] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   /**
@@ -154,16 +155,17 @@ export const EditServiceForm = ({ service }: serviceInputs) => {
           type='title'
           id='title'
           name='title'
-          value={title}
+          placeholder={title}
           onChange={(e: any) => {
             setTitle(e.target.value);
           }}></input>
+        <br />
         <label htmlFor='description' className='description'>
           サービスの概要
         </label>
         <textarea
           name='description'
-          value={description}
+          placeholder={description}
           onChange={(e: any) => {
             setDesc(e.target.value);
           }}></textarea>
@@ -182,36 +184,34 @@ export const EditServiceForm = ({ service }: serviceInputs) => {
         <label id='benefits' className='formHeader'>
           おすすめな理由の設定
         </label>
-        <table className='inputTable'>
-          <thead>
-            <tr>
-              <th>理由のヘッドライン</th>
-              <th>理由の説明</th>
-            </tr>
-          </thead>
-          <tbody>
-            {benefits.map((benefit) => {
-              return (
-                <tr key={benefit.id}>
-                  <td>
-                    <input
-                      value={benefit.title}
-                      onChange={(e: any) => {
-                        updateDetail(e, benefits, benefit.id, 'title');
-                      }}></input>
-                  </td>
-                  <td>
-                    <textarea
-                      onChange={(e: any) => {
-                        updateDetail(e, benefits, benefit.id, 'description');
-                      }}
-                      value={benefit.description}></textarea>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+
+        {benefits.map((benefit) => {
+          return (
+            <div className='benefitInputs' key={benefit.id}>
+              <label id='benefitTitle' className='formHeader'>
+                理由{benefit.id}のヘッドライン・キャッチコピー
+              </label>
+              <br />
+              <input
+                placeholder={benefit.title}
+                onChange={(e: any) => {
+                  updateDetail(e, benefits, benefit.id, 'title');
+                }}></input>
+              <br />
+              <label id='benefitTitle' className='formHeader'>
+                理由{benefit.id}の説明
+              </label>
+              <br />
+              <textarea
+                onChange={(e: any) => {
+                  updateDetail(e, benefits, benefit.id, 'description');
+                }}
+                placeholder={benefit.description}></textarea>
+              <br />
+            </div>
+          );
+        })}
+
         <div className='addRowContainer'>
           <button
             onClick={() => {
@@ -225,72 +225,54 @@ export const EditServiceForm = ({ service }: serviceInputs) => {
         <label id='steps' className='formHeader'>
           サービスの流れ
         </label>
-        <table className='inputTable'>
-          <thead>
-            <tr>
-              <th>Step</th>
-              <th>ステップの主な説明</th>
-              <th>ステップの細かい説明</th>
-            </tr>
-          </thead>
-          <tbody>
-            {steps.map((step) => {
-              return (
-                <tr key={step.id}>
-                  <td>{step.id}</td>
-                  <td>
-                    <input
-                      onChange={(e: any) => {
-                        updateDetail(e, steps, step.id, 'title');
-                      }}
-                      value={step.title}></input>
-                  </td>
-                  <td>
-                    <textarea
-                      onChange={(e: any) => {
-                        updateDetail(e, steps, step.id, 'description');
-                      }}
-                      value={step.description}></textarea>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        {steps.map((step) => {
+          return (
+            <div key={step.id} className='stepInputArea'>
+              <label id='stepTitle' className='formHeader'>
+                ステップ{step.id}のヘッドライン・キャッチコピー・主な説明
+              </label>
+              <input
+                onChange={(e: any) => {
+                  updateDetail(e, steps, step.id, 'title');
+                }}
+                placeholder={step.title}></input>
+              <label id='stepTitle' className='formHeader'>
+                ステップ{step.id}のの細かい説明
+              </label>
+              <textarea
+                onChange={(e: any) => {
+                  updateDetail(e, steps, step.id, 'description');
+                }}
+                placeholder={step.description}></textarea>
+            </div>
+          );
+        })}
         <label id='costs' className='formHeader'>
           サービスの料金設定
         </label>
-        <table className='inputTable'>
-          <thead>
-            <tr>
-              <th>期限・回数</th>
-              <th>料金</th>
-            </tr>
-          </thead>
-          <tbody>
-            {costs.map((cost) => {
-              return (
-                <tr key={cost.id}>
-                  <th>
-                    <input
-                      name='priceType'
-                      onChange={(e: any) => {
-                        updateDetail(e, costs, cost.id, 'title');
-                      }}
-                      value={cost.title}></input>
-                  </th>
-                  <th>
-                    <input
-                      onChange={(e: any) => {
-                        updateDetail(e, costs, cost.id, 'description');
-                      }}
-                      value={cost.description}></input>
-                  </th>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        {costs.map((cost) => {
+          return (
+            <div key={cost.id} className='costInputArea'>
+              <label id='stepTitle' className='formHeader'>
+                期限・回数・エリア範囲{cost.id}
+              </label>
+              <input
+                name='priceType'
+                onChange={(e: any) => {
+                  updateDetail(e, costs, cost.id, 'title');
+                }}
+                placeholder={cost.title}></input>
+              <label id='stepTitle' className='formHeader'>
+                料金{cost.id}
+              </label>
+              <input
+                onChange={(e: any) => {
+                  updateDetail(e, costs, cost.id, 'description');
+                }}
+                placeholder={cost.description}></input>
+            </div>
+          );
+        })}
         <div className='addRowContainer'>
           <button
             onClick={() => {
@@ -302,40 +284,33 @@ export const EditServiceForm = ({ service }: serviceInputs) => {
           </button>
         </div>
         <br />
+
         <label id='steps' className='formHeader'>
-          サービスの感想の追加
+          サービスの感想の編集
         </label>
-        <table className='inputTable'>
-          <thead>
-            <tr>
-              <th>キーフレーズ</th>
-              <th>感想内容</th>
-            </tr>
-          </thead>
-          <tbody>
-            {reviews.map((review) => {
-              return (
-                <tr key={review.id}>
-                  <th>
-                    <input
-                      onChange={(e: any) => {
-                        updateDetail(e, reviews, review.id, 'title');
-                      }}
-                      name='priceType'
-                      value={review.title}></input>
-                  </th>
-                  <th>
-                    <input
-                      onChange={(e: any) => {
-                        updateDetail(e, reviews, review.id, 'description');
-                      }}
-                      value={review.description}></input>
-                  </th>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        {reviews.map((review) => {
+          return (
+            <div key={review.id} className='costInputArea'>
+              <label id='stepTitle' className='formHeader'>
+                感想{review.id}キーフレーズ・キャッチコピー・ヘッドライン
+              </label>
+              <input
+                onChange={(e: any) => {
+                  updateDetail(e, reviews, review.id, 'title');
+                }}
+                name='priceType'
+                placeholder={review.title}></input>
+              <label id='stepTitle' className='formHeader'>
+                感想{review.id}内容
+              </label>
+              <textarea
+                onChange={(e: any) => {
+                  updateDetail(e, reviews, review.id, 'description');
+                }}
+                placeholder={review.description}></textarea>
+            </div>
+          );
+        })}
         <div className='addRowContainer'>
           <button
             onClick={() => {
@@ -372,7 +347,7 @@ export const EditServiceForm = ({ service }: serviceInputs) => {
         {error ? <span className='errorMsg'></span> : <></>}
         <div style={{ textAlign: 'center' }}>
           <button onClick={submitService} id='submitButton'>
-            サービスを登録する
+            サービス内容を更新する
           </button>
           {error ? (
             <span className='errMsg'>"エラーが発生いたしました"</span>

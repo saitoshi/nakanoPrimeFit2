@@ -174,38 +174,32 @@ export const CreateServiceForm = () => {
         <label id='benefits' className='formHeader'>
           おすすめな理由の設定
         </label>
-        <table className='inputTable'>
-          <thead>
-            <tr>
-              <th>理由のヘッドライン</th>
-              <th>理由の説明</th>
-            </tr>
-          </thead>
-          <tbody>
-            {benefits.map((benefit) => {
-              return (
-                <tr key={benefit.id}>
-                  <td>
-                    <input
-                      placeholder='(例：「質の高いトレーニング」を提供します。
-)'
-                      onChange={(e: any) => {
-                        updateDetail(e, benefits, benefit.id, 'title');
-                      }}></input>
-                  </td>
-                  <td>
-                    <textarea
-                      onChange={(e: any) => {
-                        updateDetail(e, benefits, benefit.id, 'description');
-                      }}
-                      placeholder='(例：しんどい筋トレだけでなく、一人、ひとりの体の状態に応じてストレッチやご自宅での運動も指導いたします。
-。'></textarea>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+
+        {benefits.map((benefit) => {
+          return (
+            <div className='benefitInputs' key={benefit.id}>
+              <label id='benefitTitle' className='formHeader'>
+                理由{benefit.id}のヘッドライン・キャッチコピー
+              </label>
+              <br />
+              <input
+                onChange={(e: any) => {
+                  updateDetail(e, benefits, benefit.id, 'title');
+                }}></input>
+              <br />
+              <label id='benefitTitle' className='formHeader'>
+                理由{benefit.id}の説明
+              </label>
+              <br />
+              <textarea
+                onChange={(e: any) => {
+                  updateDetail(e, benefits, benefit.id, 'description');
+                }}></textarea>
+              <br />
+            </div>
+          );
+        })}
+
         <div className='addRowContainer'>
           <button
             onClick={() => {
@@ -219,70 +213,54 @@ export const CreateServiceForm = () => {
         <label id='steps' className='formHeader'>
           サービスの流れ
         </label>
-        <table className='inputTable'>
-          <thead>
-            <tr>
-              <th>Step</th>
-              <th>ステップの主な説明</th>
-              <th>ステップの細かい説明</th>
-            </tr>
-          </thead>
-          <tbody>
-            {stepsRow.map((step) => {
-              return (
-                <tr key={step.id}>
-                  <td>{step.id}</td>
-                  <td>
-                    <input
-                      onChange={(e: any) => {
-                        updateDetail(e, steps, step.id, 'title');
-                      }}></input>
-                  </td>
-                  <td>
-                    <textarea
-                      onChange={(e: any) => {
-                        updateDetail(e, steps, step.id, 'description');
-                      }}></textarea>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        {steps.map((step) => {
+          return (
+            <div key={step.id} className='stepInputArea'>
+              <label id='stepTitle' className='formHeader'>
+                ステップ{step.id}のヘッドライン・キャッチコピー・主な説明
+              </label>
+              <input
+                onChange={(e: any) => {
+                  updateDetail(e, steps, step.id, 'title');
+                }}
+                placeholder={step.title}></input>
+              <label id='stepTitle' className='formHeader'>
+                ステップ{step.id}のの細かい説明
+              </label>
+              <textarea
+                onChange={(e: any) => {
+                  updateDetail(e, steps, step.id, 'description');
+                }}
+                placeholder={step.description}></textarea>
+            </div>
+          );
+        })}
         <label id='costs' className='formHeader'>
           サービスの料金設定
         </label>
-        <table className='inputTable'>
-          <thead>
-            <tr>
-              <th>期限・回数</th>
-              <th>料金</th>
-            </tr>
-          </thead>
-          <tbody>
-            {costs.map((cost) => {
-              return (
-                <tr key={cost.id}>
-                  <th>
-                    <input
-                      name='priceType'
-                      onChange={(e: any) => {
-                        updateDetail(e, costs, cost.id, 'title');
-                      }}
-                      placeholder='(例：回数券)'></input>
-                  </th>
-                  <th>
-                    <input
-                      onChange={(e: any) => {
-                        updateDetail(e, costs, cost.id, 'description');
-                      }}
-                      placeholder='(例: 9,000円)'></input>
-                  </th>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        {costs.map((cost) => {
+          return (
+            <div key={cost.id} className='costInputArea'>
+              <label id='stepTitle' className='formHeader'>
+                期限・回数・エリア範囲{cost.id}
+              </label>
+              <input
+                name='priceType'
+                onChange={(e: any) => {
+                  updateDetail(e, costs, cost.id, 'title');
+                }}
+                placeholder={cost.title}></input>
+              <label id='stepTitle' className='formHeader'>
+                料金{cost.id}
+              </label>
+              <input
+                onChange={(e: any) => {
+                  updateDetail(e, costs, cost.id, 'description');
+                }}
+                placeholder={cost.description}></input>
+            </div>
+          );
+        })}
         <div className='addRowContainer'>
           <button
             onClick={() => {
@@ -297,37 +275,29 @@ export const CreateServiceForm = () => {
         <label id='steps' className='formHeader'>
           サービスの感想の追加
         </label>
-        <table className='inputTable'>
-          <thead>
-            <tr>
-              <th>キーフレーズ</th>
-              <th>感想内容</th>
-            </tr>
-          </thead>
-          <tbody>
-            {reviews.map((review) => {
-              return (
-                <tr key={review.id}>
-                  <th>
-                    <input
-                      onChange={(e: any) => {
-                        updateDetail(e, reviews, review.id, 'title');
-                      }}
-                      name='priceType'
-                      placeholder='(例：3ヶ月で−4kg)'></input>
-                  </th>
-                  <th>
-                    <input
-                      onChange={(e: any) => {
-                        updateDetail(e, reviews, review.id, 'description');
-                      }}
-                      placeholder='(例: パーソナルトレーニングで利用。トレーナーによる適切な食事管理と週1回の筋トレで3ヶ月で−4kg。仕事の関係で自宅での筋トレとウォーキング程度しか出来ないのでまずまずの結果に満足。トレーナーの知識も豊富で、疑問点・不安な点等、親切丁寧に教えてもらえます。) '></input>
-                  </th>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        {reviews.map((review) => {
+          return (
+            <div key={review.id} className='costInputArea'>
+              <label id='stepTitle' className='formHeader'>
+                感想{review.id}キーフレーズ・キャッチコピー・ヘッドライン
+              </label>
+              <input
+                onChange={(e: any) => {
+                  updateDetail(e, reviews, review.id, 'title');
+                }}
+                name='priceType'
+                placeholder={review.title}></input>
+              <label id='stepTitle' className='formHeader'>
+                感想{review.id}内容
+              </label>
+              <textarea
+                onChange={(e: any) => {
+                  updateDetail(e, reviews, review.id, 'description');
+                }}
+                placeholder={review.description}></textarea>
+            </div>
+          );
+        })}
         <div className='addRowContainer'>
           <button
             onClick={() => {
