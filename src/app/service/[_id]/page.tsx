@@ -117,11 +117,11 @@ export default async function Page(props: { params: tParams }) {
             </thead>
             <tbody>
               {serviceInfo?.costs.map(
-                (cost: { title: string; cost: string }) => {
+                (cost: { title: string; description: string }) => {
                   return (
                     <tr className='priceBody' key={cost.title}>
                       <th>{cost.title}</th>
-                      <th>{cost.cost}</th>
+                      <th>{cost.description}</th>
                     </tr>
                   );
                 },

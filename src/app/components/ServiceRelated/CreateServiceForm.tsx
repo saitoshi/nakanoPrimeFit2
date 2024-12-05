@@ -1,7 +1,10 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { IService } from '@/app/constants/type';
-import { verifyToken } from '@/app/utils/assistFunctions/userFunctions';
+import {
+  verifyToken,
+  getToken,
+} from '@/app/utils/assistFunctions/userFunctions';
 import { LoadingWheel } from '../ConditionalComponents/LoadingWheel';
 import { useRouter } from 'next/navigation';
 
@@ -19,6 +22,47 @@ export const CreateServiceForm = () => {
     const costHolder = [...costs];
     costHolder.push({ id: costs.length + 1 });
     setCosts(costHolder);
+  };
+  const updateDetail = async (
+    e: any,
+    holder: any,
+    id: number,
+    contentArea: string,
+  ) => {
+    let index = 0;
+    const tempHolder = [...holder];
+    for (let i = 0; i < holder.length; i++) {
+      if (holder[i].id === id) {
+        index = i;
+      }
+    }
+    switch (contentArea) {
+      case 'title':
+        tempHolder[index].title = e.target.value;
+        break;
+      case 'description':
+        tempHolder[index].description = e.target.value;
+        break;
+      default:
+        break;
+    }
+    switch (holder) {
+      case 'steps':
+        setSteps(tempHolder);
+        break;
+      case 'costs':
+        setCosts(tempHolder);
+        break;
+      case 'benefits':
+        setBenefits(tempHolder);
+        break;
+      case 'reviews':
+        setReviews(tempHolder);
+        break;
+      default:
+        break;
+    }
+    await console.log(tempHolder);
   };
   const [benefits, setBenefits] = useState<IService['benefits']>([]);
   const addBenefits = () => {
@@ -41,7 +85,43 @@ export const CreateServiceForm = () => {
   const [load, setLoad] = useState<boolean>(true);
   const [success, setSuccess] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
-
+  /**
+   * @name submitService
+   * @desc Function to send the service in the API
+   * @return success or fail
+   */
+  const submitService = async (e: any) => {
+    try {
+      e.preventDefault();
+      const token = await getToken();
+      await setLoad(true);
+      const serverResponse = await fetch('/api/service', {
+        headers: { Authorization: `Bearer: ${token}` },
+        body: JSON.stringify({
+          title,
+          description,
+          thumbnail,
+          steps,
+          benefits,
+          reviews,
+          status,
+          costs,
+        }),
+        method: 'POST',
+      });
+      const serviceData = await serverResponse.json();
+      await console.log(serviceData);
+      if (serviceData['status'] === 403) {
+        await setError(true);
+      } else if (serviceData['status'] === 201) {
+        await setSuccess(true);
+      }
+    } catch (error) {
+      await setError(true);
+    } finally {
+      await setLoad(false);
+    }
+  };
   useEffect(() => {
     const verify = async () => {
       const response = await verifyToken();
@@ -86,7 +166,12 @@ export const CreateServiceForm = () => {
         <label htmlFor='title' className='formHeader'>
           サービス用のサムネ画像
         </label>
-        <input type='file' name='serviceThumbnail'></input>
+        <input
+          type='file'
+          name='serviceThumbnail'
+          onChange={(e: any) => {
+            setThumbnail(e.target.value);
+          }}></input>
         <label id='benefits' className='formHeader'>
           おすすめな理由の設定
         </label>
@@ -104,10 +189,16 @@ export const CreateServiceForm = () => {
                   <td>
                     <input
                       placeholder='(例：「質の高いトレーニング」を提供します。
-)'></input>
+)'
+                      onChange={(e: any) => {
+                        updateDetail(e, benefits, benefit.id, 'title');
+                      }}></input>
                   </td>
                   <td>
                     <textarea
+                      onChange={(e: any) => {
+                        updateDetail(e, benefits, benefit.id, 'description');
+                      }}
                       placeholder='(例：しんどい筋トレだけでなく、一人、ひとりの体の状態に応じてストレッチやご自宅での運動も指導いたします。
 。'></textarea>
                   </td>
@@ -143,10 +234,16 @@ export const CreateServiceForm = () => {
                 <tr key={step.id}>
                   <td>{step.id}</td>
                   <td>
-                    <input></input>
+                    <input
+                      onChange={(e: any) => {
+                        updateDetail(e, steps, step.id, 'title');
+                      }}></input>
                   </td>
                   <td>
-                    <textarea></textarea>
+                    <textarea
+                      onChange={(e: any) => {
+                        updateDetail(e, steps, step.id, 'description');
+                      }}></textarea>
                   </td>
                 </tr>
               );
@@ -168,10 +265,19 @@ export const CreateServiceForm = () => {
               return (
                 <tr key={cost.id}>
                   <th>
-                    <input name='priceType' placeholder='(例：回数券)'></input>
+                    <input
+                      name='priceType'
+                      onChange={(e: any) => {
+                        updateDetail(e, costs, cost.id, 'title');
+                      }}
+                      placeholder='(例：回数券)'></input>
                   </th>
                   <th>
-                    <input placeholder='(例: 9,000円)'></input>
+                    <input
+                      onChange={(e: any) => {
+                        updateDetail(e, costs, cost.id, 'description');
+                      }}
+                      placeholder='(例: 9,000円)'></input>
                   </th>
                 </tr>
               );
@@ -205,11 +311,18 @@ export const CreateServiceForm = () => {
                 <tr key={review.id}>
                   <th>
                     <input
+                      onChange={(e: any) => {
+                        updateDetail(e, reviews, review.id, 'title');
+                      }}
                       name='priceType'
                       placeholder='(例：3ヶ月で−4kg)'></input>
                   </th>
                   <th>
-                    <input placeholder='(例: パーソナルトレーニングで利用。トレーナーによる適切な食事管理と週1回の筋トレで3ヶ月で−4kg。仕事の関係で自宅での筋トレとウォーキング程度しか出来ないのでまずまずの結果に満足。トレーナーの知識も豊富で、疑問点・不安な点等、親切丁寧に教えてもらえます。) '></input>
+                    <input
+                      onChange={(e: any) => {
+                        updateDetail(e, reviews, review.id, 'description');
+                      }}
+                      placeholder='(例: パーソナルトレーニングで利用。トレーナーによる適切な食事管理と週1回の筋トレで3ヶ月で−4kg。仕事の関係で自宅での筋トレとウォーキング程度しか出来ないのでまずまずの結果に満足。トレーナーの知識も豊富で、疑問点・不安な点等、親切丁寧に教えてもらえます。) '></input>
                   </th>
                 </tr>
               );
@@ -234,18 +347,29 @@ export const CreateServiceForm = () => {
             type='radio'
             id='status'
             name='service_status'
-            value='draft'></input>
+            value='draft'
+            onChange={(e: any) => {
+              setStatus(e.target.value);
+            }}></input>
           <label htmlFor='html'>非公開</label>
           <input
             type='radio'
             id='status'
             name='service_status'
-            value='released'></input>
+            value='released'
+            onChange={(e: any) => {
+              setStatus(e.target.value);
+            }}></input>
           <label htmlFor='html'>公開</label>
         </div>
         {error ? <span className='errorMsg'></span> : <></>}
         <div style={{ textAlign: 'center' }}>
-          <button id='submitButton'>サービスを登録する</button>
+          <button
+            id='submitButton'
+            onClick={submitService}
+            disabled={!title && !description}>
+            サービスを登録する
+          </button>
         </div>
       </div>
     </>
