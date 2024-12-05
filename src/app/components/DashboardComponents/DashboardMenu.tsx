@@ -6,7 +6,8 @@ import { UserForm } from '../FormRelated/UserForm';
 import { BlogForm } from '../FormRelated/BlogForm';
 import './style.css';
 import { useMedia } from 'react-use';
-import { ServiceTable } from '../TableComponents/ServiceTable';
+import Link from 'next/link';
+import { ServiceTable2 } from '../TableComponents/ServiceTable';
 export const DashboardMenu = () => {
   interface ITab {
     title: string;
@@ -61,20 +62,14 @@ export const DashboardMenu = () => {
                 </button>
               );
             })}
-            <button
-              onClick={() => {
-                handleClick('addBlog');
-              }}
-              className='createBlogButton'>
-              &#x270E; ブログ作成
-            </button>
-            <button
-              onClick={() => {
-                handleClick('addService');
-              }}
-              className='addServiceButton'>
-              &#x271A; サービス追加
-            </button>
+            <Link href='/create-blog' style={{ textDecoration: 'none' }}>
+              <button className='createBlogButton'>&#x270E; ブログ作成</button>
+            </Link>
+            <Link href='/create-service' style={{ textDecoration: 'none' }}>
+              <button className='addServiceButton'>
+                &#x271A; サービス追加
+              </button>
+            </Link>
             <button
               onClick={() => {
                 handleClick('addUser');
@@ -100,7 +95,7 @@ export const DashboardMenu = () => {
                   ? { display: 'block' }
                   : { display: 'none' }
               }>
-              <ServiceTable />
+              <ServiceTable2 />
             </div>
             <div
               className='tabContent'
@@ -141,20 +136,14 @@ export const DashboardMenu = () => {
       ) : (
         <div id='mobileTab'>
           <div className='mobileTabHeader'>
-            <button
-              onClick={() => {
-                handleClick('addBlog');
-              }}
-              className='createBlogButton'>
-              &#x270E; ブログ作成
-            </button>
-            <button
-              onClick={() => {
-                handleClick('addService');
-              }}
-              className='addServiceButton'>
-              &#x271A; サービス追加
-            </button>
+            <Link href='/create-blog' style={{ textDecoration: 'none' }}>
+              <button className='createBlogButton'>&#x270E; ブログ作成</button>
+            </Link>
+            <Link href='/create-service' style={{ textDecoration: 'none' }}>
+              <button className='addServiceButton'>
+                &#x271A; サービス追加
+              </button>
+            </Link>
             <button
               onClick={() => {
                 handleClick('addUser');
@@ -227,7 +216,7 @@ export const DashboardMenu = () => {
                 ? { display: 'block' }
                 : { display: 'none' }
             }>
-            <ServiceTable />
+            <ServiceTable2 />
           </div>
         </div>
       )}

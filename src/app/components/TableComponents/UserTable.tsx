@@ -57,33 +57,29 @@ export const UserTable = () => {
     <>
       <div id='userList'>
         <h2 className='listHeader'>
-          <p className='subHeader'>REGISTERED USER</p>
-          <p className='mainHeader'>登録管理ユーザー</p>
+          <p className='subHeader'>USER ARCHIVE</p>
+          <p className='mainHeader'>ユーザーまとめ</p>
         </h2>
-        <table className='listTable'>
-          <thead>
-            <tr>
-              <th>メールアドレス</th>
-              <th>登録日程</th>
-              <th>最終ログイン</th>
-              <th>編集</th>
-            </tr>
-          </thead>
-          <tbody>
-            {userList?.map((user) => {
-              return (
-                <tr key={user._id}>
-                  <th>{user.email}</th>
-                  <th>{user.createdAt.toString().split('T')[0]}</th>
-                  <th>{user.lastLoggedIn.toString().split('T')[0]}</th>
-                  <th>
-                    <button className='edit-button'>&#x270E;</button>
-                  </th>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <ul className='responsive-table'>
+          <li className='tableHeader'>
+            <div className='blog col-1'>メールアドレス</div>
+            <div className='blog col-2'>登録日程</div>
+            <div className='blog col-3'>編集</div>
+          </li>
+          {userList?.map((user) => {
+            return (
+              <li className='tableRow' key={user._id}>
+                <div className='blog col-1'>{user.email}</div>
+                <div className='blog col-2'>
+                  {user.createdAt.toString().split('T')[0]}
+                </div>
+                <div className='blog col-3'>
+                  <button className='edit-button'>&#x270E;</button>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </>
   );
