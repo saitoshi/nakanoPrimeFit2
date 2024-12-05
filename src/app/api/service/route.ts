@@ -3,11 +3,10 @@ import { ServiceModel } from '@/app/utils/dataSchemas/serviceSchemas';
 import { NextRequest, NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
 
-export async function GET(request: NextRequest): Promise<NextResponse> {
+export async function GET(): Promise<NextResponse> {
   try {
     await connectDB();
-    var serviceList: any = await ServiceModel.find();
-
+    const serviceList = await ServiceModel.find();
     return NextResponse.json(
       { message: 'Got All The Services', services: serviceList },
       { status: 201 },
@@ -33,7 +32,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     token = await token.split(' ')[1];
     const secretKey = process.env.SESSION_SECRET as string;
 
-    let decoded = await jwt.verify(token, secretKey);
+    const decoded = await jwt.verify(token, secretKey);
     if (!decoded) {
       return NextResponse.json({
         message: 'verification error',

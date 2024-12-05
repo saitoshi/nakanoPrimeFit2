@@ -14,7 +14,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     token = await token.split(' ')[1];
     const secretKey = process.env.SESSION_SECRET as string;
 
-    let decoded = await jwt.verify(token, secretKey);
+    const decoded = await jwt.verify(token, secretKey);
     if (!decoded) {
       return NextResponse.json({
         message: 'verification error',

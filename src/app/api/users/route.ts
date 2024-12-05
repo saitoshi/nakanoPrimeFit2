@@ -19,7 +19,7 @@ export async function GET(request: any): Promise<NextResponse> {
 
     const secretKey = process.env.SESSION_SECRET as string;
 
-    let decoded = await jwt.verify(token, secretKey);
+    const decoded = await jwt.verify(token, secretKey);
 
     if (!decoded) {
       return NextResponse.json({
@@ -45,7 +45,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     await connectDB();
     const res = await request.json();
-    let userExits = await UserModel.findOne({ email: res.email });
+    const userExits = await UserModel.findOne({ email: res.email });
     if (userExits) {
       return NextResponse.json(
         { status: 400, message: 'User Exists' },
