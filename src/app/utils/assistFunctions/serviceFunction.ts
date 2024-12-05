@@ -1,6 +1,5 @@
 import { IService } from '@/app/constants/type';
 import { getToken } from './userFunctions';
-
 /**
  * @name getSerivces
  * @desc Retrieves all of the services available

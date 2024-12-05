@@ -62,7 +62,6 @@ export const CreateServiceForm = () => {
       default:
         break;
     }
-    await console.log(tempHolder);
   };
   const [benefits, setBenefits] = useState<IService['benefits']>([]);
   const addBenefits = () => {

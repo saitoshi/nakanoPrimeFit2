@@ -1,6 +1,9 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { verifyToken } from '@/app/utils/assistFunctions/userFunctions';
+import {
+  verifyToken,
+  getToken,
+} from '@/app/utils/assistFunctions/userFunctions';
 import { useRouter } from 'next/navigation';
 import { IService } from '@/app/constants/type';
 import { LoadingWheel } from '../../ConditionalComponents/LoadingWheel';
@@ -13,6 +16,9 @@ export const EditServiceForm = ({ service }: serviceInputs) => {
   const [title, setTitle] = useState<IService['title']>(service.title);
   const [description, setDesc] = useState<IService['description']>(
     service.description,
+  );
+  const [thumbnail, setThumbnail] = useState<IService['thumbnail']>(
+    service.thumbnail,
   );
   const [steps, setSteps] = useState<IService['steps']>(service.steps);
   const [costs, setCosts] = useState<IService['costs']>(service.costs);
@@ -46,27 +52,97 @@ export const EditServiceForm = ({ service }: serviceInputs) => {
     };
     verify();
   }, []);
+  const updateDetail = async (
+    e: any,
+    holder: any,
+    id: number,
+    contentArea: string,
+  ) => {
+    let index = 0;
+    const tempHolder = [...holder];
+    for (let i = 0; i < holder.length; i++) {
+      if (holder[i].id === id) {
+        index = i;
+      }
+    }
+    switch (contentArea) {
+      case 'title':
+        tempHolder[index].title = e.target.value;
+        break;
+      case 'description':
+        tempHolder[index].description = e.target.value;
+        break;
+      default:
+        break;
+    }
+    switch (holder) {
+      case 'steps':
+        setSteps(tempHolder);
+        break;
+      case 'costs':
+        setCosts(tempHolder);
+        break;
+      case 'benefits':
+        setBenefits(tempHolder);
+        break;
+      case 'reviews':
+        setReviews(tempHolder);
+        break;
+      default:
+        break;
+    }
+  };
   // conditional variable set up
   const [load, setLoad] = useState<boolean>(false);
   const [verified, setVerified] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
-  // a hook to submit the form
-  const submitNewService = async (e: any) => {
+  /**
+   * @name submitService
+   * @desc Function to send the service in the API
+   * @return success or fail
+   */
+  const submitService = async (e: any) => {
     try {
+      e.preventDefault();
+      const token = await getToken();
       await setLoad(true);
+      const serverResponse = await fetch(`/api/service/id=${service._id}`, {
+        headers: { Authorization: `Bearer: ${token}` },
+        body: JSON.stringify({
+          title,
+          description,
+          thumbnail,
+          steps,
+          benefits,
+          reviews,
+          status,
+          costs,
+        }),
+        method: 'POST',
+      });
+      const serviceData = await serverResponse.json();
+      await console.log(serviceData);
+      if (serviceData['status'] === 403) {
+        await setError(true);
+      } else if (serviceData['status'] === 201) {
+        await setSuccess(true);
+      }
     } catch (error) {
       await setError(true);
     } finally {
       await setLoad(false);
     }
   };
+
   if (load) {
     return (
       <>
         <LoadingWheel />
       </>
     );
+  } else if (success) {
+    router.push('/success');
   }
   return (
     <>
@@ -94,7 +170,12 @@ export const EditServiceForm = ({ service }: serviceInputs) => {
         <label htmlFor='title' className='formHeader'>
           サービス用のサムネ画像
         </label>
-        <input type='file' name='serviceThumbnail'></input>
+        <input
+          type='file'
+          name='serviceThumbnail'
+          onChange={(e: any) => {
+            setThumbnail(e.target.value);
+          }}></input>
         <b>サムネのプレビュー</b>
         <br />
         <img src={service.thumbnail} className='previewSize' />
@@ -113,10 +194,18 @@ export const EditServiceForm = ({ service }: serviceInputs) => {
               return (
                 <tr key={benefit.id}>
                   <td>
-                    <input value={benefit.title}></input>
+                    <input
+                      value={benefit.title}
+                      onChange={(e: any) => {
+                        updateDetail(e, benefits, benefit.id, 'title');
+                      }}></input>
                   </td>
                   <td>
-                    <textarea value={benefit.description}></textarea>
+                    <textarea
+                      onChange={(e: any) => {
+                        updateDetail(e, benefits, benefit.id, 'description');
+                      }}
+                      value={benefit.description}></textarea>
                   </td>
                 </tr>
               );
@@ -129,7 +218,7 @@ export const EditServiceForm = ({ service }: serviceInputs) => {
               addBenefits();
             }}
             className='addRowButton'
-            id='addCostButton'>
+            id='addBenefitButton'>
             進める理由を追加する
           </button>
         </div>
@@ -150,10 +239,18 @@ export const EditServiceForm = ({ service }: serviceInputs) => {
                 <tr key={step.id}>
                   <td>{step.id}</td>
                   <td>
-                    <input value={step.title}></input>
+                    <input
+                      onChange={(e: any) => {
+                        updateDetail(e, steps, step.id, 'title');
+                      }}
+                      value={step.title}></input>
                   </td>
                   <td>
-                    <textarea value={step.description}></textarea>
+                    <textarea
+                      onChange={(e: any) => {
+                        updateDetail(e, steps, step.id, 'description');
+                      }}
+                      value={step.description}></textarea>
                   </td>
                 </tr>
               );
@@ -175,10 +272,19 @@ export const EditServiceForm = ({ service }: serviceInputs) => {
               return (
                 <tr key={cost.id}>
                   <th>
-                    <input name='priceType' placeholder={cost.title}></input>
+                    <input
+                      name='priceType'
+                      onChange={(e: any) => {
+                        updateDetail(e, costs, cost.id, 'title');
+                      }}
+                      value={cost.title}></input>
                   </th>
                   <th>
-                    <input placeholder={cost.description}></input>
+                    <input
+                      onChange={(e: any) => {
+                        updateDetail(e, costs, cost.id, 'description');
+                      }}
+                      value={cost.description}></input>
                   </th>
                 </tr>
               );
@@ -211,10 +317,19 @@ export const EditServiceForm = ({ service }: serviceInputs) => {
               return (
                 <tr key={review.id}>
                   <th>
-                    <input name='priceType' placeholder={review.title}></input>
+                    <input
+                      onChange={(e: any) => {
+                        updateDetail(e, reviews, review.id, 'title');
+                      }}
+                      name='priceType'
+                      value={review.title}></input>
                   </th>
                   <th>
-                    <input placeholder={review.description}></input>
+                    <input
+                      onChange={(e: any) => {
+                        updateDetail(e, reviews, review.id, 'description');
+                      }}
+                      value={review.description}></input>
                   </th>
                 </tr>
               );
@@ -239,18 +354,31 @@ export const EditServiceForm = ({ service }: serviceInputs) => {
             type='radio'
             id='status'
             name='service_status'
-            value='draft'></input>
+            value='draft'
+            onChange={(e: any) => {
+              setStatus(e.target.value);
+            }}></input>
           <label htmlFor='html'>非公開</label>
           <input
             type='radio'
             id='status'
             name='service_status'
-            value='released'></input>
+            value='released'
+            onChange={(e: any) => {
+              setStatus(e.target.value);
+            }}></input>
           <label htmlFor='html'>公開</label>
         </div>
         {error ? <span className='errorMsg'></span> : <></>}
         <div style={{ textAlign: 'center' }}>
-          <button id='submitButton'>サービスを登録する</button>
+          <button onClick={submitService} id='submitButton'>
+            サービスを登録する
+          </button>
+          {error ? (
+            <span className='errMsg'>"エラーが発生いたしました"</span>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </>
