@@ -60,6 +60,10 @@ export const CreateBlog = () => {
       }
     };
     verify();
+
+    if (success) {
+      router.push('/success');
+    }
   }, []);
 
   const submitBlog = async (e: any) => {
@@ -76,6 +80,7 @@ export const CreateBlog = () => {
         content,
         status,
       );
+      await setSuccess(true);
     } catch (error) {
       await setError(true);
     } finally {
@@ -213,6 +218,11 @@ export const CreateBlog = () => {
             ブログ登録
           </button>
         </div>
+        {error ? (
+          <span className='errorMsg'>エラーが発生いたしました</span>
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );

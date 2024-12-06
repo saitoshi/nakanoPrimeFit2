@@ -3,7 +3,7 @@ import { UserModel } from '@/app/utils/dataSchemas/userSchema';
 import { NextRequest, NextResponse } from 'next/server';
 import * as bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-export async function GET(request: any): Promise<NextResponse> {
+export async function GET(request: NextRequest): Promise<NextResponse> {
   // do something
   try {
     await connectDB();

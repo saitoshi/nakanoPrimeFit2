@@ -3,12 +3,10 @@ import { BlogModel } from '@/app/utils/dataSchemas/blogSchema';
 import { NextRequest, NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
 
-export async function GET(request: NextRequest): Promise<NextResponse> {
+export async function GET(): Promise<NextResponse> {
   try {
-    const input = request;
     await connectDB();
-    var blogMap = await BlogModel.find();
-
+    const blogMap = await BlogModel.find();
     return NextResponse.json(
       { message: 'blog list', blogs: blogMap },
       { status: 201 },
